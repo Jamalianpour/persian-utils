@@ -6,19 +6,39 @@
 
     <groupId>io.github.jamalianpour</groupId>
     <artifactId>persian-utils</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.4.0</version>
     <packaging>jar</packaging>
 
     <name>Persian Utils</name>
-    <description>A comprehensive Java library for Persian/Farsi language utilities</description>
+    <description>A comprehensive Java library for Persian/Farsi language utilities and Jalali calendar</description>
     <url>https://github.com/jamalianpour/persian-utils</url>
 
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>https://github.com/Jamalianpour/persian-utils/blob/master/LICENSE</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Mohammad Jamalianpour</name>
+            <email>jamalianmjp@gmail.com</email>
+            <url>https://github.com/Jamalianpour</url>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/Jamalianpour/persian-utils.git</connection>
+        <developerConnection>scm:git:ssh://github.com:Jamalianpour/persian-utils.git</developerConnection>
+        <url>https://github.com/Jamalianpour/persian-utils/tree/master</url>
+    </scm>
+
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-                <junit.version>5.10.0</junit.version>
-        <!--        <mockito.version>5.5.0</mockito.version>-->
+        <junit.version>5.10.0</junit.version>
     </properties>
 
     <dependencies>
@@ -42,48 +62,12 @@
         </dependency>
     </dependencies>
 
-    <!--    <dependencies>-->
-    <!--        &lt;!&ndash; JUnit 5 for testing &ndash;&gt;-->
-    <!--        <dependency>-->
-    <!--            <groupId>org.junit.jupiter</groupId>-->
-    <!--            <artifactId>junit-jupiter-api</artifactId>-->
-    <!--            <version>${junit.version}</version>-->
-    <!--            <scope>test</scope>-->
-    <!--        </dependency>-->
-    <!--        <dependency>-->
-    <!--            <groupId>org.junit.jupiter</groupId>-->
-    <!--            <artifactId>junit-jupiter-engine</artifactId>-->
-    <!--            <version>${junit.version}</version>-->
-    <!--            <scope>test</scope>-->
-    <!--        </dependency>-->
-    <!--        <dependency>-->
-    <!--            <groupId>org.junit.jupiter</groupId>-->
-    <!--            <artifactId>junit-jupiter-params</artifactId>-->
-    <!--            <version>${junit.version}</version>-->
-    <!--            <scope>test</scope>-->
-    <!--        </dependency>-->
-
-    <!--        &lt;!&ndash; Mockito for mocking &ndash;&gt;-->
-    <!--        <dependency>-->
-    <!--            <groupId>org.mockito</groupId>-->
-    <!--            <artifactId>mockito-core</artifactId>-->
-    <!--            <version>${mockito.version}</version>-->
-    <!--            <scope>test</scope>-->
-    <!--        </dependency>-->
-
-    <!--Apache Commons Lang for utility functions -->
-    <!--        <dependency>-->
-    <!--            <groupId>org.apache.commons</groupId>-->
-    <!--            <artifactId>commons-lang3</artifactId>-->
-    <!--        </dependency>-->
-    <!--    </dependencies>-->
-
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.11.0</version>
+                <version>3.13.0</version>
                 <configuration>
                     <source>11</source>
                     <target>11</target>
@@ -99,7 +83,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>3.3.0</version>
+                <version>3.3.1</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
@@ -113,7 +97,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.5.0</version>
+                <version>3.11.1</version>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
@@ -123,21 +107,32 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!-- Plugin to sign artifacts -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>3.2.7</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>0.6.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <publishingServerId>central</publishingServerId>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
-
-    <licenses>
-        <license>
-            <name>MIT License</name>
-            <url>http://www.opensource.org/licenses/mit-license.php</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
-
-    <developers>
-        <developer>
-            <name>Mohammad Jamalianpour</name>
-            <email>jamalian.mjp@gmail.com</email>
-        </developer>
-    </developers>
 </project>

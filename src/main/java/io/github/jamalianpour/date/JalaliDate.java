@@ -13,9 +13,6 @@ import java.util.stream.Stream;
  *
  * Enhanced immutable value type with comprehensive features for working with Jalali dates.
  * Includes conversion, formatting, parsing, holidays, ranges, and temporal operations.
- *
- * @author Enhanced Version
- * @version 2.0
  */
 public final class JalaliDate implements Comparable<JalaliDate>, Serializable {
 

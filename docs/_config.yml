@@ -1,0 +1,53 @@
+# Site settings
+title: Persian Utils Documentation
+description: A comprehensive Java library for Persian/Farsi language utilities and Jalali calendar
+url: https://jamalianpour.github.io
+baseurl: /persian-utils
+
+# Theme
+theme: jekyll-theme-cayman
+
+# Build settings
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+# Plugins
+plugins:
+  - jekyll-relative-links
+  - jekyll-optional-front-matter
+
+# Optional front matter
+optional_front_matter:
+  enabled: true
+
+# Relative links
+relative_links:
+  enabled: true
+  collections: false
+
+# Navigation
+navigation:
+  - title: Home
+    url: /
+  - title: Usage Guide
+    url: /usage
+  - title: API Reference
+    url: /api
+  - title: Examples
+    url: /examples
+  - title: GitHub
+    url: https://github.com/jamalianpour/persian-utils
+
+# Exclude from processing
+exclude:
+  - README.md
+  - README_FA.md
+  - LICENSE
+  - .gitignore
+  - vendor/
+
+# Include
+include:
+  - _config.yml
