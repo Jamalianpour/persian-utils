@@ -85,10 +85,7 @@ boolean validPostalCode = IranianPostalCode.isValid("1234567890");
 
 ## Documentation
 
-For detailed usage instructions, examples, and API reference, please see:
-- **[Usage Guide](docs/USAGE.md)** - Comprehensive usage documentation
-- **[API Reference](docs/API.md)** - Complete API documentation
-- **[Examples](docs/EXAMPLES.md)** - Code examples and recipes
+For detailed usage instructions, examples, and API reference, please see **[Documents](https://jamalianpour.github.io/persian-utils/)**
 
 ### Requirements
 - Java 17 or higher
