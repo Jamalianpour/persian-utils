@@ -35,31 +35,73 @@ public class PersianFileSizeFormatter {
      * Number formatting style
      */
     public enum NumberStyle {
-        NUMERIC,    // ۱۰۲۴ بایت
-        WORDS       // یک هزار و بیست و چهار بایت
+        /**
+         * ۱۰۲۴ بایت
+         */
+        NUMERIC,
+        /**
+         * یک هزار و بیست و چهار بایت
+         */
+        WORDS
     }
 
     /**
      * Unit display style
      */
     public enum UnitStyle {
-        FULL,       // کیلوبایت
-        SHORT,      // کیلوبایت (Persian doesn't commonly use KB abbreviations)
-        ENGLISH     // KB (for technical contexts)
+        /**
+         * کیلوبایت
+         */
+        FULL,
+        /**
+         * کیلوبایت (Persian doesn't commonly use KB abbreviations)
+         */
+        SHORT,
+        /**
+         * KB (for technical contexts)
+         */
+        ENGLISH
     }
 
     /**
      * File size units with Persian translations
      */
     private enum FileSizeUnit {
+        /**
+         * بایت
+         */
         BYTE("بایت", "بایت", "B", 0),
+        /**
+         * کیلوبایت
+         */
         KILOBYTE("کیلوبایت", "کیلوبایت", "KB", 1),
+        /**
+         * مگابایت
+         */
         MEGABYTE("مگابایت", "مگابایت", "MB", 2),
+        /**
+         * گیگابایت
+         */
         GIGABYTE("گیگابایت", "گیگابایت", "GB", 3),
+        /**
+         * ترابایت
+         */
         TERABYTE("ترابایت", "ترابایت", "TB", 4),
+        /**
+         * پتابایت
+         */
         PETABYTE("پتابایت", "پتابایت", "PB", 5),
+        /**
+         * اگزابایت
+         */
         EXABYTE("اگزابایت", "اگزابایت", "EB", 6),
+        /**
+         * زتابایت
+         */
         ZETTABYTE("زتابایت", "زتابایت", "ZB", 7),
+        /**
+         * یوتابایت
+         */
         YOTTABYTE("یوتابایت", "یوتابایت", "YB", 8);
 
         private final String persianName;
@@ -74,18 +116,39 @@ public class PersianFileSizeFormatter {
             this.power = power;
         }
 
+        /**
+         * Returns the Persian name of the file size unit.
+         *
+         * @return the Persian name of the file size unit
+         */
         public String getPersianName() {
             return persianName;
         }
 
+        /**
+         * Returns the short form of the file size unit (e.g., "کیلو" for کیلوبایت).
+         *
+         * @return the short form of the file size unit
+         */
         public String getShortForm() {
             return shortForm;
         }
 
+        /**
+         * Returns the English abbreviation of the file size unit (e.g., "KB" for کیلوبایت).
+         *
+         * @return the English abbreviation of the file size unit
+         */
         public String getEnglishAbbreviation() {
             return englishAbbreviation;
         }
 
+        /**
+         * Returns the power of the file size unit.
+         * For example, the power of کیلوبایت is 3, because 1 کیلوبایت is equal to 1024 bytes.
+         *
+         * @return the power of the file size unit
+         */
         public int getPower() {
             return power;
         }
@@ -93,7 +156,8 @@ public class PersianFileSizeFormatter {
 
     /**
      * Formats file size with default settings (binary mode, numeric style, full units).
-     * 
+     * Example: 1024 becomes "۱ کیلوبایت"
+     *
      * @param bytes the file size in bytes
      * @return formatted Persian file size string
      */
@@ -102,10 +166,10 @@ public class PersianFileSizeFormatter {
     }
 
     /**
-     * Formats file size with specified mode.
-     * 
+     * Formats file size with specified calculation mode.
+     *
      * @param bytes the file size in bytes
-     * @param mode the calculation mode (binary or decimal)
+     * @param mode  the calculation mode (BINARY uses 1024, DECIMAL uses 1000)
      * @return formatted Persian file size string
      */
     public static String format(long bytes, SizeMode mode) {
@@ -114,9 +178,9 @@ public class PersianFileSizeFormatter {
 
     /**
      * Formats file size with specified mode and number style.
-     * 
-     * @param bytes the file size in bytes
-     * @param mode the calculation mode (binary or decimal)
+     *
+     * @param bytes       the file size in bytes
+     * @param mode        the calculation mode (binary or decimal)
      * @param numberStyle the number formatting style
      * @return formatted Persian file size string
      */
@@ -126,16 +190,16 @@ public class PersianFileSizeFormatter {
 
     /**
      * Formats file size with all formatting options.
-     * 
-     * @param bytes the file size in bytes
-     * @param mode the calculation mode (binary or decimal)
-     * @param numberStyle the number formatting style
-     * @param unitStyle the unit display style
+     *
+     * @param bytes         the file size in bytes
+     * @param mode          the calculation mode (binary or decimal)
+     * @param numberStyle   the number formatting style
+     * @param unitStyle     the unit display style
      * @param decimalPlaces number of decimal places to show
      * @return formatted Persian file size string
      */
-    public static String format(long bytes, SizeMode mode, NumberStyle numberStyle, 
-                               UnitStyle unitStyle, int decimalPlaces) {
+    public static String format(long bytes, SizeMode mode, NumberStyle numberStyle,
+                                UnitStyle unitStyle, int decimalPlaces) {
         if (bytes < 0) {
             throw new IllegalArgumentException("File size cannot be negative");
         }
@@ -146,19 +210,27 @@ public class PersianFileSizeFormatter {
 
         // Find the appropriate unit
         FileSizeUnit unit = findBestUnit(bytes, mode);
-        
+
         // Calculate the value
         double value = calculateValue(bytes, unit, mode);
-        
+
         // Format the result
         return formatResult(value, unit, numberStyle, unitStyle, decimalPlaces);
     }
 
+
     /**
-     * Formats file size from double bytes (for precision calculations).
+     * Formats a file size with all formatting options.
+     *
+     * @param bytes         the file size in bytes
+     * @param mode          the calculation mode (binary or decimal)
+     * @param numberStyle   the number formatting style
+     * @param unitStyle     the unit display style
+     * @param decimalPlaces number of decimal places to show
+     * @return formatted Persian file size string
      */
-    public static String format(double bytes, SizeMode mode, NumberStyle numberStyle, 
-                               UnitStyle unitStyle, int decimalPlaces) {
+    public static String format(double bytes, SizeMode mode, NumberStyle numberStyle,
+                                UnitStyle unitStyle, int decimalPlaces) {
         if (bytes < 0) {
             throw new IllegalArgumentException("File size cannot be negative");
         }
@@ -169,19 +241,21 @@ public class PersianFileSizeFormatter {
 
         // Find the appropriate unit
         FileSizeUnit unit = findBestUnit((long) bytes, mode);
-        
+
         // Calculate the value
         double value = calculateValue(bytes, unit, mode);
-        
+
         // Format the result
         return formatResult(value, unit, numberStyle, unitStyle, decimalPlaces);
     }
 
     /**
      * Provides human-readable file size with automatic precision.
-     * 
+     * Automatically determines appropriate decimal places based on size.
+     *
      * @param bytes the file size in bytes
      * @return formatted Persian file size string with appropriate precision
+     * @throws IllegalArgumentException if bytes is negative
      */
     public static String formatHumanReadable(long bytes) {
         if (bytes < 0) {
@@ -194,16 +268,17 @@ public class PersianFileSizeFormatter {
 
         FileSizeUnit unit = findBestUnit(bytes, SizeMode.BINARY);
         double value = calculateValue(bytes, unit, SizeMode.BINARY);
-        
+
         // Automatically determine decimal places
         int decimalPlaces = (value >= 100) ? 0 : (value >= 10) ? 1 : 2;
-        
+
         return formatResult(value, unit, NumberStyle.NUMERIC, UnitStyle.FULL, decimalPlaces);
     }
 
     /**
      * Formats file size with words for accessibility.
-     * 
+     * Example: 1024 becomes "یک کیلوبایت"
+     *
      * @param bytes the file size in bytes
      * @return formatted Persian file size string with number words
      */
@@ -213,7 +288,7 @@ public class PersianFileSizeFormatter {
 
     /**
      * Formats multiple file sizes for comparison.
-     * 
+     *
      * @param sizes array of file sizes in bytes
      * @return array of formatted Persian file size strings
      */
@@ -231,9 +306,11 @@ public class PersianFileSizeFormatter {
 
     /**
      * Parses a Persian file size string back to bytes (basic implementation).
-     * 
-     * @param sizeString the Persian file size string
+     * Converts Persian digits and extracts numeric value and unit.
+     *
+     * @param sizeString the Persian file size string (e.g., "۱ کیلوبایت")
      * @return file size in bytes
+     * @throws IllegalArgumentException if the string format is invalid
      */
     public static long parse(String sizeString) {
         if (sizeString == null || sizeString.trim().isEmpty()) {
@@ -241,10 +318,10 @@ public class PersianFileSizeFormatter {
         }
 
         String normalized = sizeString.trim().toLowerCase();
-        
+
         // Convert Persian digits to English
         normalized = PersianNumberConverter.toEnglishDigits(normalized);
-        
+
         // Simple parsing logic - extract number and unit
         String[] parts = normalized.split("\\s+");
         if (parts.length < 2) {
@@ -254,16 +331,16 @@ public class PersianFileSizeFormatter {
         try {
             double value = Double.parseDouble(parts[0]);
             String unitStr = parts[1];
-            
+
             // Find matching unit
             FileSizeUnit unit = findUnitByPersianName(unitStr);
             if (unit == null) {
                 throw new IllegalArgumentException("Unknown unit: " + unitStr);
             }
-            
+
             // Calculate bytes
             return (long) (value * Math.pow(SizeMode.BINARY.getBase(), unit.getPower()));
-            
+
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Invalid number format in: " + sizeString, e);
         }
@@ -274,14 +351,14 @@ public class PersianFileSizeFormatter {
      */
     private static FileSizeUnit findBestUnit(long bytes, SizeMode mode) {
         FileSizeUnit[] units = FileSizeUnit.values();
-        
+
         for (int i = units.length - 1; i >= 0; i--) {
             long threshold = (long) Math.pow(mode.getBase(), units[i].getPower());
             if (bytes >= threshold) {
                 return units[i];
             }
         }
-        
+
         return FileSizeUnit.BYTE;
     }
 
@@ -292,7 +369,7 @@ public class PersianFileSizeFormatter {
         if (unit == FileSizeUnit.BYTE) {
             return bytes;
         }
-        
+
         double divisor = Math.pow(mode.getBase(), unit.getPower());
         return bytes / divisor;
     }
@@ -300,14 +377,14 @@ public class PersianFileSizeFormatter {
     /**
      * Formats the final result string.
      */
-    private static String formatResult(double value, FileSizeUnit unit, NumberStyle numberStyle, 
-                                     UnitStyle unitStyle, int decimalPlaces) {
+    private static String formatResult(double value, FileSizeUnit unit, NumberStyle numberStyle,
+                                       UnitStyle unitStyle, int decimalPlaces) {
         // Round the value
         BigDecimal rounded = BigDecimal.valueOf(value).setScale(decimalPlaces, RoundingMode.HALF_UP);
-        
+
         String numberPart;
         String unitPart;
-        
+
         // Format number part
         if (numberStyle == NumberStyle.WORDS && rounded.longValue() == rounded.doubleValue()) {
             // Use words only for whole numbers
@@ -320,7 +397,7 @@ public class PersianFileSizeFormatter {
                 numberPart = PersianNumberConverter.toPersianDigits(String.valueOf(rounded.longValue()));
             }
         }
-        
+
         // Format unit part
         switch (unitStyle) {
             case FULL:
@@ -335,7 +412,7 @@ public class PersianFileSizeFormatter {
             default:
                 unitPart = unit.getPersianName();
         }
-        
+
         return numberPart + " " + unitPart;
     }
 
@@ -356,8 +433,8 @@ public class PersianFileSizeFormatter {
      */
     private static FileSizeUnit findUnitByPersianName(String persianName) {
         for (FileSizeUnit unit : FileSizeUnit.values()) {
-            if (unit.getPersianName().equals(persianName) || 
-                unit.getShortForm().equals(persianName)) {
+            if (unit.getPersianName().equals(persianName) ||
+                    unit.getShortForm().equals(persianName)) {
                 return unit;
             }
         }

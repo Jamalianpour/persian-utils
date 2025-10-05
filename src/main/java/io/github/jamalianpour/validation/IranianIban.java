@@ -85,10 +85,11 @@ public class IranianIban {
     }
 
     /**
-     * Validates an Iranian IBAN (SHEBA).
+     * Validates an Iranian IBAN (SHEBA) using the mod-97 check digit algorithm.
+     * Supports various input formats and automatically normalizes the input.
      *
-     * @param iban the IBAN to validate
-     * @return true if valid, false otherwise
+     * @param iban the IBAN to validate (with or without IR prefix, may contain spaces/hyphens)
+     * @return true if the IBAN is valid according to mod-97 algorithm, false otherwise
      */
     public static boolean isValid(String iban) {
         if (iban == null || iban.isEmpty()) {
@@ -139,10 +140,11 @@ public class IranianIban {
     }
 
     /**
-     * Normalizes an IBAN by removing spaces, converting Persian digits, and converting to uppercase.
+     * Normalizes an IBAN by converting Persian digits, removing formatting,
+     * and adding IR prefix if needed.
      *
      * @param iban the IBAN to normalize
-     * @return normalized IBAN or null if invalid format
+     * @return normalized 26-character IBAN (IR + 24 digits), or null if invalid format
      */
     public static String normalizeIban(String iban) {
         if (iban == null || iban.isEmpty()) {
@@ -173,9 +175,10 @@ public class IranianIban {
 
     /**
      * Formats an IBAN with spaces for better readability.
+     * Example: "IR123456789012345678901234" becomes "IR12 3456 7890 1234 5678 9012 34"
      *
      * @param iban the IBAN to format
-     * @return formatted IBAN (IR00 0000 0000 0000 0000 0000 00) or null if invalid
+     * @return formatted IBAN with spaces, or null if invalid
      */
     public static String format(String iban) {
         iban = normalizeIban(iban);
@@ -212,10 +215,11 @@ public class IranianIban {
     }
 
     /**
-     * Extracts the bank code from an IBAN.
+     * Extracts the 3-digit bank code from an IBAN.
+     * The bank code is located at positions 5-7 of the IBAN.
      *
-     * @param iban the IBAN
-     * @return 3-digit bank code or null if invalid
+     * @param iban the IBAN to extract bank code from
+     * @return 3-digit bank code, or null if IBAN is invalid
      */
     public static String getBankCode(String iban) {
         iban = normalizeIban(iban);
@@ -228,10 +232,11 @@ public class IranianIban {
     }
 
     /**
-     * Gets bank information from an IBAN.
+     * Gets detailed bank information from an IBAN using the bank code.
+     * Provides Persian and English bank names and abbreviations.
      *
-     * @param iban the IBAN
-     * @return BankInfo object or null if not found
+     * @param iban the IBAN to analyze
+     * @return BankInfo object with bank details, or null if bank not found
      */
     public static BankInfo getBankInfo(String iban) {
         String bankCode = getBankCode(iban);
@@ -343,11 +348,12 @@ public class IranianIban {
     }
 
     /**
-     * Generates an IBAN from bank code and account number.
+     * Generates a complete IBAN from bank code and account number.
+     * Automatically calculates and adds the correct check digits.
      *
      * @param bankCode 3-digit bank code
-     * @param accountNumber account number (will be padded to 19 digits)
-     * @return complete IBAN or null if invalid input
+     * @param accountNumber account number (will be used as-is, ensure it's 19 digits)
+     * @return complete IBAN with calculated check digits, or null if invalid input
      */
     public static String generateIban(String bankCode, String accountNumber) {
         if (bankCode == null || accountNumber == null) {

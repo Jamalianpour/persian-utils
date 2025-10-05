@@ -45,26 +45,57 @@ public class IranianPostalCode {
             this.rangeEnd = rangeEnd;
         }
 
+        /**
+         * Gets the province name in Persian.
+         *
+         * @return province name in Persian
+         */
         public String getProvincePersian() {
             return provincePersian;
         }
 
+        /**
+         * Gets the province name in English.
+         *
+         * @return province name in English
+         */
         public String getProvinceEnglish() {
             return provinceEnglish;
         }
 
+        /**
+         * Gets the city name in Persian.
+         *
+         * @return city name in Persian
+         */
         public String getCityPersian() {
             return cityPersian;
         }
 
+        /**
+         * Gets the city name in English.
+         *
+         * @return city name in English
+         */
         public String getCityEnglish() {
             return cityEnglish;
         }
 
+        /**
+         * Gets the start of the range for this postal code range.
+         *
+         * @return the start of the range for this postal code range
+         */
         public int getRangeStart() {
             return rangeStart;
         }
 
+
+        /**
+         * Gets the end of the range for this postal code range.
+         *
+         * @return the end of the range for this postal code range
+         */
         public int getRangeEnd() {
             return rangeEnd;
         }
@@ -116,9 +147,10 @@ public class IranianPostalCode {
 
     /**
      * Validates an Iranian postal code.
+     * Checks format, validates against known region ranges, and filters invalid patterns.
      *
-     * @param postalCode the postal code to validate
-     * @return true if valid, false otherwise
+     * @param postalCode the postal code to validate (10 digits, may contain formatting)
+     * @return true if the postal code is valid and falls within known region ranges, false otherwise
      */
     public static boolean isValid(String postalCode) {
         if (postalCode == null || postalCode.isEmpty()) {
@@ -183,10 +215,11 @@ public class IranianPostalCode {
     }
 
     /**
-     * Normalizes a postal code by removing formatting and converting Persian digits.
+     * Normalizes a postal code by converting Persian digits and removing formatting.
+     * Ensures the result is exactly 10 digits.
      *
      * @param postalCode the postal code to normalize
-     * @return normalized postal code or null if invalid
+     * @return normalized 10-digit postal code, or null if invalid length
      */
     public static String normalize(String postalCode) {
         if (postalCode == null || postalCode.isEmpty()) {
@@ -208,7 +241,8 @@ public class IranianPostalCode {
     }
 
     /**
-     * Formats a postal code with a hyphen.
+     * Formats a postal code with a hyphen for readability.
+     * Example: "1234567890" becomes "12345-67890"
      *
      * @param postalCode the postal code to format
      * @return formatted postal code (XXXXX-XXXXX) or null if invalid
@@ -257,10 +291,11 @@ public class IranianPostalCode {
     }
 
     /**
-     * Gets the province name from a postal code.
+     * Gets the province name from a postal code using the region code (first 5 digits).
+     * Looks up the province in the loaded postal code ranges.
      *
-     * @param postalCode the postal code
-     * @return province name in Persian or null if not found
+     * @param postalCode the postal code to analyze
+     * @return province name in Persian, or null if not found
      */
     public static String getProvinceName(String postalCode) {
         PostalCodeRange range = getPostalCodeRange(postalCode);
@@ -268,10 +303,11 @@ public class IranianPostalCode {
     }
 
     /**
-     * Gets the city name from a postal code.
+     * Gets the city name from a postal code using the region code (first 5 digits).
+     * Looks up the city in the loaded postal code ranges.
      *
-     * @param postalCode the postal code
-     * @return city name in Persian or null if not found
+     * @param postalCode the postal code to analyze
+     * @return city name in Persian, or null if not found
      */
     public static String getCityName(String postalCode) {
         PostalCodeRange range = getPostalCodeRange(postalCode);
@@ -341,30 +377,67 @@ public class IranianPostalCode {
             }
         }
 
+
+        /**
+         * Gets the original postal code.
+         *
+         * @return the original postal code
+         */
         public String getPostalCode() {
             return postalCode;
         }
 
+
+        /**
+         * Gets the validation status of the postal code.
+         *
+         * @return true if the postal code is valid, false otherwise
+         */
         public boolean isValid() {
             return valid;
         }
 
+        /**
+         * Gets the postal code range information associated with this postal code.
+         *
+         * @return the postal code range information, or null if the postal code is invalid
+         */
         public PostalCodeRange getPostalCodeRange() {
             return postalCodeRange;
         }
 
+        /**
+         * Gets the region code of the postal code.
+         *
+         * @return the region code of the postal code
+         */
         public String getRegionCode() {
             return regionCode;
         }
 
+        /**
+         * Gets the local code (last 5 digits) of the postal code.
+         *
+         * @return the local code of the postal code
+         */
         public String getLocalCode() {
             return localCode;
         }
 
+        /**
+         * Gets the formatted postal code.
+         *
+         * @return the formatted postal code (XXXXX-XXXXX) or null if invalid
+         */
         public String getFormatted() {
             return formatted;
         }
 
+        /**
+         * Gets the formatted postal code with Persian digits.
+         *
+         * @return the formatted postal code (XXXXX-XXXXX) with Persian digits, or null if invalid
+         */
         public String getFormattedPersian() {
             return formattedPersian;
         }
@@ -400,9 +473,10 @@ public class IranianPostalCode {
     }
 
     /**
-     * Gets all unique provinces from the loaded data.
+     * Gets all unique provinces from the loaded postal code data.
+     * Returns provinces in the order they appear in the data.
      *
-     * @return list of unique province names (Persian)
+     * @return list of unique province names in Persian
      */
     public static List<String> getAllProvinces() {
         Set<String> provinces = new LinkedHashSet<>();

@@ -55,10 +55,11 @@ public class IranianNationalId {
     }
 
     /**
-     * Validates an Iranian National ID.
+     * Validates an Iranian National ID using the official check digit algorithm.
+     * Supports Persian digits and formatted input (with hyphens/spaces).
      *
-     * @param nationalId the national ID to validate
-     * @return true if valid, false otherwise
+     * @param nationalId the national ID to validate (10 digits, may contain formatting)
+     * @return true if the national ID is valid according to official algorithm, false otherwise
      */
     public static boolean isValid(String nationalId) {
         if (nationalId == null || nationalId.isEmpty()) {
@@ -129,9 +130,10 @@ public class IranianNationalId {
 
     /**
      * Formats a national ID with hyphens for better readability.
+     * Example: "1234567890" becomes "123-456789-0"
      *
      * @param nationalId the national ID to format
-     * @return formatted national ID or null if invalid
+     * @return formatted national ID (XXX-XXXXXX-X) or null if invalid
      */
     public static String format(String nationalId) {
         if (nationalId == null || nationalId.isEmpty()) {
@@ -168,8 +170,9 @@ public class IranianNationalId {
 
     /**
      * Extracts the province/city code from a national ID.
+     * The first 3 digits represent the issuing province/city.
      *
-     * @param nationalId the national ID
+     * @param nationalId the national ID to analyze
      * @return province code (first 3 digits) or null if invalid
      */
     public static String getProvinceCode(String nationalId) {
@@ -188,10 +191,11 @@ public class IranianNationalId {
     }
 
     /**
-     * Gets the province/city name based on the national ID.
+     * Gets the province/city name based on the national ID's first 3 digits.
+     * Uses the official province code mapping.
      *
-     * @param nationalId the national ID
-     * @return province/city name or null if not found
+     * @param nationalId the national ID to analyze
+     * @return province/city name in Persian, or "نامشخص" if not found
      */
     public static String getProvinceName(String nationalId) {
         String provinceCode = getProvinceCode(nationalId);
@@ -271,11 +275,13 @@ public class IranianNationalId {
 
     /**
      * Generates a valid test national ID for development purposes.
+     * Calculates the correct check digit using the official algorithm.
      * WARNING: These should only be used for testing, not for real identification.
      *
      * @param provinceCode the 3-digit province code
      * @param uniqueNumber a 6-digit unique number
      * @return a valid national ID with correct check digit
+     * @throws IllegalArgumentException if input format is invalid
      */
     public static String generateTestId(String provinceCode, String uniqueNumber) {
         if (provinceCode == null || provinceCode.length() != 3 ||

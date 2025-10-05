@@ -74,9 +74,10 @@ public class PersianRelativeTimeFormatter {
 
     /**
      * Formats the time difference between now and the given JalaliDate as Persian relative time.
+     * Uses numeric style formatting (e.g., "۵ دقیقه پیش").
      * 
      * @param date the JalaliDate to compare with current time
-     * @return Persian relative time string
+     * @return Persian relative time string (e.g., "۲ ساعت پیش", "۳ روز آینده")
      */
     public static String formatRelativeTime(JalaliDate date) {
         return formatRelativeTime(date, FormatStyle.NUMERIC);
@@ -86,8 +87,8 @@ public class PersianRelativeTimeFormatter {
      * Formats the time difference between now and the given JalaliDate with specified style.
      * 
      * @param date the JalaliDate to compare with current time
-     * @param style the formatting style
-     * @return Persian relative time string
+     * @param style the formatting style (NUMERIC, WORDS, SHORT, or FUZZY)
+     * @return Persian relative time string formatted according to the specified style
      */
     public static String formatRelativeTime(JalaliDate date, FormatStyle style) {
         LocalDateTime now = LocalDateTime.now();
@@ -98,6 +99,7 @@ public class PersianRelativeTimeFormatter {
 
     /**
      * Formats the time difference between two LocalDateTime objects.
+     * Uses numeric style formatting.
      * 
      * @param from the reference time (usually now)
      * @param to the target time
@@ -138,9 +140,10 @@ public class PersianRelativeTimeFormatter {
 
     /**
      * Formats a time difference from seconds ago.
+     * Uses numeric style formatting.
      * 
      * @param secondsAgo seconds in the past
-     * @return Persian relative time string
+     * @return Persian relative time string (e.g., "۳۰ ثانیه پیش")
      */
     public static String formatSecondsAgo(long secondsAgo) {
         return formatSecondsAgo(secondsAgo, FormatStyle.NUMERIC);
@@ -170,9 +173,10 @@ public class PersianRelativeTimeFormatter {
 
     /**
      * Formats a time difference in the future.
+     * Uses numeric style formatting.
      * 
      * @param secondsInFuture seconds in the future
-     * @return Persian relative time string
+     * @return Persian relative time string (e.g., "۱۰ دقیقه دیگر")
      */
     public static String formatSecondsInFuture(long secondsInFuture) {
         return formatSecondsInFuture(secondsInFuture, FormatStyle.NUMERIC);
@@ -308,42 +312,93 @@ public class PersianRelativeTimeFormatter {
      * Convenience method for common time periods.
      */
     public static class Common {
+        /**
+         * Returns a string representing "just now" in Persian.
+         *
+         * @return a string representing "just now" in Persian
+         */
         public static String justNow() {
             return "هم‌اکنون";
         }
 
+        /**
+         * Returns a string representing "a few seconds ago" in Persian.
+         *
+         * @return a string representing "a few seconds ago" in Persian
+         */
         public static String fewSecondsAgo() {
             return "چند لحظه پیش";
         }
 
+        /**
+         * Returns a string representing a time difference of one minute ago.
+         *
+         * @return a string representing a time difference of one minute ago
+         */
         public static String oneMinuteAgo() {
             return "یک دقیقه پیش";
         }
 
+        /**
+         * Returns a string representing a few minutes ago.
+         *
+         * @return a string representing a few minutes ago
+         */
         public static String fewMinutesAgo() {
             return "چند دقیقه پیش";
         }
 
+        /**
+         * Returns a string representing a time difference of one hour ago.
+         *
+         * @return a string representing a time difference of one hour ago
+         */
         public static String oneHourAgo() {
             return "یک ساعت پیش";
         }
 
+        /**
+         * Returns a string representing a time difference of a few hours ago.
+         *
+         * @return a string representing a time difference of a few hours ago
+         */
         public static String fewHoursAgo() {
             return "چند ساعت پیش";
         }
 
+
+        /**
+         * Gets the Jalali date for yesterday from the system clock in the default time-zone.
+         *
+         * @return the Jalali date for yesterday
+         */
         public static String yesterday() {
             return "دیروز";
         }
 
+        /**
+         * Returns a string representing a time difference of a few days ago.
+         *
+         * @return a string representing a time difference of a few days ago
+         */
         public static String fewDaysAgo() {
             return "چند روز پیش";
         }
 
+        /**
+         * Returns a string representing a time difference of one week ago.
+         *
+         * @return a string representing a time difference of one week ago
+         */
         public static String oneWeekAgo() {
             return "یک هفته پیش";
         }
 
+        /**
+         * Returns a string representing a time difference of a few weeks ago.
+         *
+         * @return a string representing a time difference of a few weeks ago
+         */
         public static String fewWeeksAgo() {
             return "چند هفته پیش";
         }

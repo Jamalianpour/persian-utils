@@ -17,9 +17,10 @@ public class PersianNumberConverter {
 
     /**
      * Converts English/Western digits to Persian digits in a string.
+     * Example: "123" becomes "۱۲۳", "Hello 123" becomes "Hello ۱۲۳"
      *
-     * @param input the input string
-     * @return string with Persian digits
+     * @param input the input string containing digits to convert
+     * @return string with Persian digits, or original string if input is null/empty
      */
     public static String toPersianDigits(String input) {
         if (input == null || input.isEmpty()) {
@@ -40,10 +41,11 @@ public class PersianNumberConverter {
     }
 
     /**
-     * Converts Persian digits to English/Western digits in a string.
+     * Converts Persian and Arabic digits to English/Western digits in a string.
+     * Example: "۱۲۳" becomes "123", "سلام ۱۲۳" becomes "سلام 123"
      *
-     * @param input the input string
-     * @return string with English digits
+     * @param input the input string containing Persian/Arabic digits to convert
+     * @return string with English digits, or original string if input is null/empty
      */
     public static String toEnglishDigits(String input) {
         if (input == null || input.isEmpty()) {
@@ -207,10 +209,11 @@ public class PersianNumberConverter {
 
     /**
      * Parses a string containing Persian or Arabic digits to an integer.
+     * Automatically converts digits before parsing.
      *
-     * @param persianNumber the string with Persian/Arabic digits
-     * @return the parsed integer
-     * @throws NumberFormatException if the string cannot be parsed
+     * @param persianNumber the string with Persian/Arabic digits (e.g., "۱۲۳")
+     * @return the parsed integer value
+     * @throws NumberFormatException if the string cannot be parsed as an integer
      */
     public static int parseInteger(String persianNumber) {
         String englishNumber = toEnglishDigits(persianNumber);
@@ -242,10 +245,10 @@ public class PersianNumberConverter {
     }
 
     /**
-     * Checks if a character is a Persian digit.
+     * Checks if a character is a Persian digit (۰-۹).
      *
      * @param c the character to check
-     * @return true if Persian digit, false otherwise
+     * @return true if the character is a Persian digit, false otherwise
      */
     public static boolean isPersianDigit(char c) {
         return c >= '۰' && c <= '۹';
@@ -347,8 +350,8 @@ public class PersianNumberConverter {
     /**
      * Checks if a string contains any Persian digits.
      *
-     * @param input the input string
-     * @return true if contains Persian digits, false otherwise
+     * @param input the input string to check
+     * @return true if the string contains at least one Persian digit, false otherwise
      */
     public static boolean containsPersianDigits(String input) {
         if (input == null || input.isEmpty()) {

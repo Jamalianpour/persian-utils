@@ -88,9 +88,32 @@ public class AtmCardValidator {
             this.code = code;
         }
 
+        /**
+         * Gets the 6-digit BIN (Bank Identification Number) associated with this card issuer.
+         *
+         * @return the 6-digit BIN
+         */
         public String getBin() { return bin; }
+
+        /**
+         * Gets the Persian name associated with this card issuer.
+         *
+         * @return the Persian name of the card issuer
+         */
         public String getPersianName() { return persianName; }
+
+        /**
+         * Gets the English name associated with this card issuer.
+         *
+         * @return the English name of the card issuer
+         */
         public String getEnglishName() { return englishName; }
+
+        /**
+         * Gets the code associated with this card issuer.
+         *
+         * @return the code of the card issuer
+         */
         public String getCode() { return code; }
 
         @Override
@@ -101,9 +124,10 @@ public class AtmCardValidator {
 
     /**
      * Validates an ATM/Debit card number using the Luhn algorithm.
+     * Supports both Persian and English digits, and handles formatted input.
      *
-     * @param cardNumber the card number to validate
-     * @return true if valid, false otherwise
+     * @param cardNumber the card number to validate (16 digits, may contain spaces/hyphens)
+     * @return true if the card number is valid according to Luhn algorithm, false otherwise
      */
     public static boolean isValid(String cardNumber) {
         if (cardNumber == null || cardNumber.isEmpty()) {
@@ -155,10 +179,11 @@ public class AtmCardValidator {
     }
 
     /**
-     * Normalizes a card number by removing spaces and converting Persian digits.
+     * Normalizes a card number by removing spaces, converting Persian digits to English,
+     * and validating the format.
      *
      * @param cardNumber the card number to normalize
-     * @return normalized card number or null if invalid format
+     * @return normalized 16-digit card number, or null if invalid format
      */
     public static String normalizeCardNumber(String cardNumber) {
         if (cardNumber == null || cardNumber.isEmpty()) {
@@ -186,6 +211,7 @@ public class AtmCardValidator {
 
     /**
      * Formats a card number with hyphens for better readability.
+     * Example: "1234567890123456" becomes "1234-5678-9012-3456"
      *
      * @param cardNumber the card number to format
      * @return formatted card number (XXXX-XXXX-XXXX-XXXX) or null if invalid
@@ -227,7 +253,8 @@ public class AtmCardValidator {
     }
 
     /**
-     * Masks a card number for security purposes.
+     * Masks a card number for security purposes, showing only first and last 4 digits.
+     * Example: "1234567890123456" becomes "1234-****-****-3456"
      *
      * @param cardNumber the card number to mask
      * @return masked card number (XXXX-****-****-XXXX) or null if invalid
@@ -262,10 +289,11 @@ public class AtmCardValidator {
     }
 
     /**
-     * Identifies the card issuer from a card number.
+     * Identifies the card issuer (bank) from a card number using BIN lookup.
+     * Supports Iranian banks and international networks (Visa, MasterCard, etc.).
      *
-     * @param cardNumber the card number
-     * @return CardIssuerInfo or null if not identified
+     * @param cardNumber the card number to analyze
+     * @return CardIssuerInfo containing bank details, or null if not identified
      */
     public static CardIssuerInfo getCardIssuer(String cardNumber) {
         cardNumber = normalizeCardNumber(cardNumber);
@@ -290,10 +318,11 @@ public class AtmCardValidator {
     }
 
     /**
-     * Validates a CVV2/CVC2 code.
+     * Validates a CVV2/CVC2 code format.
+     * Accepts 3 or 4 digit codes and converts Persian digits.
      *
      * @param cvv2 the CVV2 code to validate
-     * @return true if valid, false otherwise
+     * @return true if format is valid (3-4 digits), false otherwise
      */
     public static boolean isValidCvv2(String cvv2) {
         if (cvv2 == null || cvv2.isEmpty()) {
@@ -381,11 +410,48 @@ public class AtmCardValidator {
             }
         }
 
+
+        /**
+         * Gets the original card number.
+         *
+         * @return the original card number
+         */
         public String getCardNumber() { return cardNumber; }
+        /**
+         * Checks if the card is valid according to Luhn algorithm and expiration.
+         *
+         * @return true if the card is valid, false otherwise
+         */
         public boolean isValid() { return valid; }
+
+        /**
+         * Gets the 6-digit BIN (Bank Identification Number) associated with this card.
+         *
+         * @return the 6-digit BIN or null if card is invalid
+         */
         public String getBin() { return bin; }
+
+        /**
+         * Gets the card issuer associated with this card.
+         *
+         * @return the card issuer associated with this card, or null if the card is invalid
+         */
         public CardIssuerInfo getIssuer() { return issuer; }
+
+        /**
+         * Gets the card number formatted with hyphens for better readability.
+         * Example: "1234567890123456" becomes "1234-5678-9012-3456"
+         *
+         * @return the formatted card number (XXXX-XXXX-XXXX-XXXX) or null if invalid
+         */
         public String getFormatted() { return formatted; }
+
+        /**
+         * Gets the card number masked for security purposes, showing only first and last 4 digits.
+         * Example: "1234567890123456" becomes "1234-****-****-3456"
+         *
+         * @return the masked card number (XXXX-****-****-XXXX) or null if invalid
+         */
         public String getMasked() { return masked; }
 
         @Override

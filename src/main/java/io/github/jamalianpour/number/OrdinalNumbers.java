@@ -27,9 +27,11 @@ public class OrdinalNumbers {
 
     /**
      * Converts a number to its ordinal representation in Persian.
+     * Example: 1 becomes "اول", 2 becomes "دوم", 21 becomes "بیست و یکم"
      *
-     * @param number the number to convert
+     * @param number the number to convert (must be positive)
      * @return the Persian ordinal representation
+     * @throws IllegalArgumentException if number is not positive
      */
     public static String toPersianOrdinal(int number) {
         if (number <= 0) {
@@ -71,10 +73,11 @@ public class OrdinalNumbers {
 
     /**
      * Converts a number to its ordinal representation in English words.
-     * Example: 1 -> "first", 2 -> "second", 21 -> "twenty-first"
+     * Example: 1 becomes "first", 2 becomes "second", 21 becomes "twenty-first"
      *
-     * @param number the number to convert
+     * @param number the number to convert (must be positive)
      * @return the English ordinal words
+     * @throws IllegalArgumentException if number is not positive
      */
     public static String toEnglishOrdinal(int number) {
         if (number <= 0) {
@@ -159,9 +162,11 @@ public class OrdinalNumbers {
 
     /**
      * Gets the ordinal suffix for a number in English (st, nd, rd, th).
+     * Example: 1 returns "st", 2 returns "nd", 3 returns "rd", 4 returns "th"
      *
-     * @param number the number
-     * @return the appropriate suffix
+     * @param number the number (must be positive)
+     * @return the appropriate suffix ("st", "nd", "rd", or "th")
+     * @throws IllegalArgumentException if number is not positive
      */
     public static String getEnglishOrdinalSuffix(int number) {
         if (number <= 0) {
@@ -186,10 +191,11 @@ public class OrdinalNumbers {
 
     /**
      * Formats a number with its English ordinal suffix.
-     * Example: 1 -> "1st", 2 -> "2nd", 3 -> "3rd", 4 -> "4th"
+     * Example: 1 becomes "1st", 2 becomes "2nd", 3 becomes "3rd", 4 becomes "4th"
      *
-     * @param number the number to format
-     * @return the formatted ordinal number
+     * @param number the number to format (must be positive)
+     * @return the formatted ordinal number with suffix
+     * @throws IllegalArgumentException if number is not positive
      */
     public static String formatEnglishOrdinal(int number) {
         return number + getEnglishOrdinalSuffix(number);
@@ -197,10 +203,11 @@ public class OrdinalNumbers {
 
     /**
      * Formats a number with its Persian ordinal suffix.
-     * Example: 1 -> "۱م", 2 -> "۲م"
+     * Example: 1 becomes "اول", 2 becomes "دوم", 25 becomes "۲۵م"
      *
-     * @param number the number to format
+     * @param number the number to format (must be positive)
      * @return the formatted ordinal number in Persian
+     * @throws IllegalArgumentException if number is not positive
      */
     public static String formatPersianOrdinal(int number) {
         if (number <= 0) {

@@ -73,9 +73,10 @@ public class PersianTextUtils {
 
     /**
      * Checks if a string contains any Persian characters.
+     * Includes Persian letters, digits, and punctuation marks.
      *
      * @param text the text to check
-     * @return true if contains Persian characters, false otherwise
+     * @return true if the text contains at least one Persian character, false otherwise
      */
     public static boolean containsPersian(String text) {
         if (text == null || text.isEmpty()) {
@@ -91,10 +92,11 @@ public class PersianTextUtils {
     }
 
     /**
-     * Checks if a string is entirely composed of Persian characters (including spaces and punctuation).
+     * Checks if a string is entirely composed of Persian characters.
+     * Allows Persian letters, digits, punctuation, and whitespace.
      *
      * @param text the text to check
-     * @return true if entirely Persian, false otherwise
+     * @return true if the text is entirely Persian (or empty), false otherwise
      */
     public static boolean isPersian(String text) {
         if (text == null || text.isEmpty()) {
@@ -146,8 +148,9 @@ public class PersianTextUtils {
 
     /**
      * Converts Arabic characters to their Persian equivalents.
+     * Example: converts Arabic ك and ي to Persian ک and ی
      *
-     * @param text the text to convert
+     * @param text the text containing Arabic characters to convert
      * @return text with Arabic characters replaced by Persian equivalents
      */
     public static String arabicToPersian(String text) {
@@ -163,10 +166,11 @@ public class PersianTextUtils {
     }
 
     /**
-     * Normalizes Persian text by converting Arabic characters and removing diacritics.
+     * Normalizes Persian text by converting Arabic characters, removing diacritics,
+     * zero-width characters, and normalizing whitespace.
      *
      * @param text the text to normalize
-     * @return normalized Persian text
+     * @return normalized Persian text suitable for processing and comparison
      */
     public static String normalize(String text) {
         if (text == null || text.isEmpty()) {
@@ -190,9 +194,10 @@ public class PersianTextUtils {
 
     /**
      * Removes Persian diacritics (Harakat) from text.
+     * Diacritics include marks like Fatha, Damma, Kasra, etc.
      *
      * @param text the text to process
-     * @return text without diacritics
+     * @return text without diacritics, preserving all other characters
      */
     public static String removeDiacritics(String text) {
         if (text == null || text.isEmpty()) {
@@ -304,9 +309,10 @@ public class PersianTextUtils {
 
     /**
      * Extracts all Persian words from a text.
+     * Words are defined as continuous sequences of Persian letters.
      *
      * @param text the text to process
-     * @return list of Persian words
+     * @return list of Persian words found in the text
      */
     public static List<String> extractPersianWords(String text) {
         if (text == null || text.isEmpty()) {
@@ -325,6 +331,7 @@ public class PersianTextUtils {
 
     /**
      * Gets the percentage of Persian content in a text.
+     * Calculates the ratio of Persian characters to total non-whitespace characters.
      *
      * @param text the text to analyze
      * @return percentage of Persian content (0-100)
@@ -354,10 +361,11 @@ public class PersianTextUtils {
     }
 
     /**
-     * Determines the primary text direction (RTL or LTR).
+     * Determines the primary text direction (RTL or LTR) based on character analysis.
+     * Persian and Arabic characters are considered RTL, Latin characters are LTR.
      *
      * @param text the text to analyze
-     * @return TextDirection enum value
+     * @return TextDirection.RTL, TextDirection.LTR, or TextDirection.NEUTRAL
      */
     public static TextDirection getTextDirection(String text) {
         if (text == null || text.isEmpty()) {

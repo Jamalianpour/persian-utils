@@ -114,10 +114,25 @@ public class IranianPhoneValidator {
      * Operator type enumeration.
      */
     public enum OperatorType {
+        /**
+         * Mobile Network Operator
+         */
         MOBILE("Mobile Network Operator"),
+        /**
+         * Mobile Virtual Network Operator
+         */
         MVNO("Mobile Virtual Network Operator"),
+        /**
+         * Landline
+         */
         LANDLINE("Landline"),
+        /**
+         * Emergency
+         */
         EMERGENCY("Emergency"),
+        /**
+         * Unknown
+         */
         UNKNOWN("Unknown");
 
         private final String description;
@@ -126,6 +141,11 @@ public class IranianPhoneValidator {
             this.description = description;
         }
 
+        /**
+         * Gets the description of this operator type.
+         *
+         * @return the description of this operator type
+         */
         public String getDescription() {
             return description;
         }
@@ -147,9 +167,32 @@ public class IranianPhoneValidator {
             this.type = type;
         }
 
+        /**
+         * Gets the code associated with this operator.
+         *
+         * @return the code associated with this operator
+         */
         public String getCode() { return code; }
+
+        /**
+         * Gets the Persian name of the operator.
+         *
+         * @return the Persian name of the operator
+         */
         public String getPersianName() { return persianName; }
+
+        /**
+         * Gets the English name associated with this operator.
+         *
+         * @return the English name associated with this operator
+         */
         public String getEnglishName() { return englishName; }
+
+        /**
+         * Gets the type of this operator.
+         *
+         * @return the type of this operator
+         */
         public OperatorType getType() { return type; }
 
         @Override
@@ -159,10 +202,11 @@ public class IranianPhoneValidator {
     }
 
     /**
-     * Validates an Iranian phone number (mobile or landline).
+     * Validates an Iranian phone number (mobile, landline, or emergency).
+     * Supports various input formats and automatically normalizes the input.
      *
-     * @param phoneNumber the phone number to validate
-     * @return true if valid, false otherwise
+     * @param phoneNumber the phone number to validate (may contain country code, spaces, etc.)
+     * @return true if the phone number is valid (mobile, landline, or emergency), false otherwise
      */
     public static boolean isValid(String phoneNumber) {
         if (phoneNumber == null || phoneNumber.isEmpty()) {
@@ -186,10 +230,11 @@ public class IranianPhoneValidator {
     }
 
     /**
-     * Validates if a phone number is a valid mobile number.
+     * Validates if a phone number is a valid Iranian mobile number.
+     * Checks against known operator prefixes and validates format.
      *
      * @param phoneNumber the phone number to validate
-     * @return true if valid mobile, false otherwise
+     * @return true if valid Iranian mobile number, false otherwise
      */
     public static boolean isValidMobile(String phoneNumber) {
         if (phoneNumber == null || phoneNumber.isEmpty()) {
@@ -208,10 +253,11 @@ public class IranianPhoneValidator {
     }
 
     /**
-     * Validates if a phone number is a valid landline number.
+     * Validates if a phone number is a valid Iranian landline number.
+     * Checks area code against known city codes.
      *
      * @param phoneNumber the phone number to validate
-     * @return true if valid landline, false otherwise
+     * @return true if valid Iranian landline number, false otherwise
      */
     public static boolean isValidLandline(String phoneNumber) {
         if (phoneNumber == null || phoneNumber.isEmpty()) {
@@ -250,10 +296,11 @@ public class IranianPhoneValidator {
     }
 
     /**
-     * Normalizes a phone number to standard format.
+     * Normalizes a phone number to standard Iranian format (11 digits starting with 0).
+     * Handles international prefixes, Persian digits, and various formatting.
      *
      * @param phoneNumber the phone number to normalize
-     * @return normalized phone number or null if invalid
+     * @return normalized phone number in format 0XXXXXXXXXX, or null if invalid
      */
     public static String normalizePhoneNumber(String phoneNumber) {
         if (phoneNumber == null || phoneNumber.isEmpty()) {
@@ -299,10 +346,11 @@ public class IranianPhoneValidator {
     }
 
     /**
-     * Gets the operator information for a mobile number.
+     * Gets the mobile operator information for a phone number.
+     * Identifies operator based on the first 4 digits of mobile numbers.
      *
-     * @param phoneNumber the phone number
-     * @return OperatorInfo or null if not found
+     * @param phoneNumber the mobile phone number to analyze
+     * @return OperatorInfo containing operator details, or null if not a valid mobile number
      */
     public static OperatorInfo getOperator(String phoneNumber) {
         phoneNumber = normalizePhoneNumber(phoneNumber);
@@ -332,10 +380,11 @@ public class IranianPhoneValidator {
     }
 
     /**
-     * Gets the city name for a landline number.
+     * Gets the city name for a landline phone number.
+     * Uses the area code (first 3 digits) to determine the city.
      *
-     * @param phoneNumber the phone number
-     * @return city name or null if not found
+     * @param phoneNumber the landline phone number to analyze
+     * @return city name in Persian, or null if not a valid landline number
      */
     public static String getCityName(String phoneNumber) {
         String areaCode = getAreaCode(phoneNumber);

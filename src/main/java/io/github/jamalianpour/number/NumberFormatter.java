@@ -28,10 +28,20 @@ public class NumberFormatter {
             this.decimalSeparator = decimalSeparator;
         }
 
+        /**
+         * Gets the thousand separator character for this style.
+         *
+         * @return the thousand separator character
+         */
         public char getThousandSeparator() {
             return thousandSeparator;
         }
 
+        /**
+         * Gets the decimal separator character for this style.
+         *
+         * @return the decimal separator character
+         */
         public char getDecimalSeparator() {
             return decimalSeparator;
         }
@@ -50,41 +60,89 @@ public class NumberFormatter {
         private boolean groupingEnabled = true;
         private int groupingSize = 3; // Standard thousand grouping
 
+        /**
+         * Sets the separator style for formatting.
+         *
+         * @param style the separator style to use
+         * @return this FormatConfig for method chaining
+         */
         public FormatConfig withStyle(SeparatorStyle style) {
             this.style = style;
             return this;
         }
 
+        /**
+         * Sets whether to use Persian digits in the output.
+         *
+         * @param usePersianDigits true to use Persian digits, false for English digits
+         * @return this FormatConfig for method chaining
+         */
         public FormatConfig withPersianDigits(boolean usePersianDigits) {
             this.usePersianDigits = usePersianDigits;
             return this;
         }
 
+        /**
+         * Sets the number of decimal places to display.
+         *
+         * @param decimalPlaces the number of decimal places (-1 for no limit)
+         * @return this FormatConfig for method chaining
+         */
         public FormatConfig withDecimalPlaces(int decimalPlaces) {
             this.decimalPlaces = decimalPlaces;
             return this;
         }
 
+        /**
+         * Sets whether to show the positive sign for positive numbers.
+         *
+         * @param showPositiveSign true to show '+' for positive numbers
+         * @return this FormatConfig for method chaining
+         */
         public FormatConfig withPositiveSign(boolean showPositiveSign) {
             this.showPositiveSign = showPositiveSign;
             return this;
         }
 
+        /**
+         * Sets a prefix to be added before the formatted number.
+         *
+         * @param prefix the prefix string (e.g., currency symbol)
+         * @return this FormatConfig for method chaining
+         */
         public FormatConfig withPrefix(String prefix) {
             this.prefix = prefix;
             return this;
         }
 
+        /**
+         * Sets a suffix to be added after the formatted number.
+         *
+         * @param suffix the suffix string (e.g., currency name, '%')
+         * @return this FormatConfig for method chaining
+         */
         public FormatConfig withSuffix(String suffix) {
             this.suffix = suffix;
             return this;
         }
 
+        /**
+         * Sets whether thousand grouping is enabled.
+         *
+         * @param enabled true to enable thousand separators, false to disable
+         * @return this FormatConfig for method chaining
+         */
         public FormatConfig withGrouping(boolean enabled) {
             this.groupingEnabled = enabled;
             return this;
         }
 
+        /**
+         * Sets the grouping size for thousand separators.
+         *
+         * @param size the number of digits per group (typically 3)
+         * @return this FormatConfig for method chaining
+         */
         public FormatConfig withGroupingSize(int size) {
             this.groupingSize = size;
             return this;
@@ -112,6 +170,7 @@ public class NumberFormatter {
 
     /**
      * Adds thousand separators to a number using default comma style.
+     * Example: 1234567 becomes "1,234,567"
      *
      * @param number the number to format
      * @return formatted string with separators
@@ -122,9 +181,10 @@ public class NumberFormatter {
 
     /**
      * Adds thousand separators to a number using specified style.
+     * Example with PERSIAN style: 1234567 becomes "۱٬۲۳۴٬۵۶۷"
      *
      * @param number the number to format
-     * @param style  the separator style
+     * @param style  the separator style (COMMA, PERSIAN, SPACE, etc.)
      * @return formatted string with separators
      */
     public static String addSeparator(long number, SeparatorStyle style) {
@@ -134,8 +194,9 @@ public class NumberFormatter {
 
     /**
      * Adds thousand separators to a decimal number using default comma style.
+     * Example: 1234567.89 becomes "1,234,567.89"
      *
-     * @param number the number to format
+     * @param number the decimal number to format
      * @return formatted string with separators
      */
     public static String addSeparator(double number) {
@@ -144,9 +205,10 @@ public class NumberFormatter {
 
     /**
      * Adds thousand separators to a decimal number using specified style.
+     * Example with PERSIAN style: 1234567.89 becomes "۱٬۲۳۴٬۵۶۷٫۸۹"
      *
-     * @param number the number to format
-     * @param style  the separator style
+     * @param number the decimal number to format
+     * @param style  the separator style (COMMA, PERSIAN, SPACE, etc.)
      * @return formatted string with separators
      */
     public static String addSeparator(double number, SeparatorStyle style) {
@@ -156,10 +218,11 @@ public class NumberFormatter {
 
     /**
      * Formats a number using the specified configuration.
+     * Provides full control over formatting including separators, digits, prefixes, and suffixes.
      *
      * @param number the number to format
-     * @param config the format configuration
-     * @return formatted string
+     * @param config the format configuration specifying style, digits, prefixes, etc.
+     * @return formatted string according to the configuration
      */
     public static String format(long number, FormatConfig config) {
         String result = formatInternal(String.valueOf(number), config);
@@ -265,9 +328,10 @@ public class NumberFormatter {
 
     /**
      * Removes all separators from a formatted number string.
+     * Converts Persian/Arabic digits to English and removes formatting characters.
      *
-     * @param formattedNumber the formatted number string
-     * @return clean number string without separators
+     * @param formattedNumber the formatted number string (e.g., "1,234.56", "۱٬۲۳۴٫۵۶")
+     * @return clean number string without separators (e.g., "1234.56")
      */
     public static String removeSeparator(String formattedNumber) {
         if (formattedNumber == null || formattedNumber.isEmpty()) {
@@ -341,11 +405,12 @@ public class NumberFormatter {
     }
 
     /**
-     * Formats a number as currency with appropriate separators.
+     * Formats a number as currency with appropriate separators and symbols.
+     * Supports major currencies including Iranian Rial and Toman with Persian formatting.
      *
      * @param amount       the amount to format
-     * @param currencyCode the currency code (USD, EUR, IRR, etc.)
-     * @return formatted currency string
+     * @param currencyCode the currency code (USD, EUR, IRR, IRT, etc.)
+     * @return formatted currency string (e.g., "$1,234.56", "۱٬۲۳۴ ریال")
      */
     public static String formatCurrency(double amount, String currencyCode) {
         FormatConfig config = new FormatConfig()

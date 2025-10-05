@@ -71,7 +71,8 @@ public class NumberToWords {
     private static final String DINAR = "دینار";
 
     /**
-     * Converts a number to Persian words.
+     * Converts a number to its Persian word representation.
+     * Example: 123 becomes "یکصد و بیست و سه"
      *
      * @param number the number to convert
      * @return the Persian word representation
@@ -89,10 +90,11 @@ public class NumberToWords {
     }
 
     /**
-     * Converts a number to Persian words.
+     * Converts a decimal number to its Persian word representation.
+     * Example: 12.34 becomes "دوازده ممیز سه چهار"
      *
-     * @param number the number to convert
-     * @return the Persian word representation
+     * @param number the decimal number to convert
+     * @return the Persian word representation including decimal part
      */
     public static String toPersian(double number) {
         if (number == 0) {
@@ -121,10 +123,12 @@ public class NumberToWords {
     }
 
     /**
-     * Converts a BigDecimal to Persian words.
+     * Converts a BigDecimal to its Persian word representation.
+     * Handles very large numbers and precise decimal values.
+     * Example: new BigDecimal("123.456") becomes "یکصد و بیست و سه ممیز چهار پنج شش"
      *
-     * @param number the number to convert
-     * @return the Persian word representation
+     * @param number the BigDecimal number to convert
+     * @return the Persian word representation including decimal part if present
      */
     public static String toPersian(BigDecimal number) {
         if (number.compareTo(BigDecimal.ZERO) == 0) {
@@ -150,7 +154,8 @@ public class NumberToWords {
     }
 
     /**
-     * Converts a number to English words.
+     * Converts a number to its English word representation.
+     * Example: 123 becomes "one hundred twenty-three"
      *
      * @param number the number to convert
      * @return the English word representation
@@ -168,10 +173,11 @@ public class NumberToWords {
     }
 
     /**
-     * Converts a number to English words.
+     * Converts a decimal number to its English word representation.
+     * Example: 12.34 becomes "twelve point three four"
      *
-     * @param number the number to convert
-     * @return the English word representation
+     * @param number the decimal number to convert
+     * @return the English word representation including decimal part
      */
     public static String toEnglish(double number) {
         if (number == 0) {
@@ -200,10 +206,11 @@ public class NumberToWords {
 
     /**
      * Converts an amount to Persian currency words.
+     * Example: 1500 with "ریال" becomes "یک هزار و پانصد ریال"
      *
-     * @param amount   the amount
-     * @param currency the currency type (RIAL, TOMAN)
-     * @return the Persian currency representation
+     * @param amount   the amount to convert
+     * @param currency the currency type (RIAL, TOMAN, etc.)
+     * @return the Persian currency representation in words
      */
     public static String toPersianCurrency(long amount, String currency) {
         if (amount == 0) {
@@ -221,11 +228,13 @@ public class NumberToWords {
     }
 
     /**
-     * Converts an amount to Persian currency words with decimal support.
+     * Converts a decimal amount to Persian currency words with decimal support.
+     * The decimal part is converted to smaller currency units (e.g., Rial for Toman).
+     * Example: 15.25 with "تومان" becomes "پانزده تومان و بیست و پنج ریال"
      *
-     * @param amount   the amount
-     * @param currency the currency type
-     * @return the Persian currency representation
+     * @param amount   the decimal amount to convert
+     * @param currency the main currency type (TOMAN, RIAL, etc.)
+     * @return the Persian currency representation with decimal parts in smaller units
      */
     public static String toPersianCurrency(double amount, String currency) {
         long wholePart = (long) amount;
@@ -252,10 +261,11 @@ public class NumberToWords {
 
     /**
      * Converts an amount to English currency words.
+     * Example: 1500 with "dollar" becomes "one thousand five hundred dollars"
      *
-     * @param amount   the amount
-     * @param currency the currency type (DOLLAR, EURO, POUND)
-     * @return the English currency representation
+     * @param amount   the amount to convert
+     * @param currency the currency type (DOLLAR, EURO, POUND, etc.)
+     * @return the English currency representation in words
      */
     public static String toEnglishCurrency(long amount, String currency) {
         if (amount == 0) {
@@ -273,11 +283,13 @@ public class NumberToWords {
     }
 
     /**
-     * Converts an amount to English currency words with cents.
+     * Converts a decimal amount to English currency words with cents.
+     * The decimal part is converted to cents or equivalent sub-units.
+     * Example: 15.25 with "dollar" becomes "fifteen dollars and twenty-five cents"
      *
-     * @param amount   the amount
-     * @param currency the currency type
-     * @return the English currency representation
+     * @param amount   the decimal amount to convert
+     * @param currency the currency type (DOLLAR, EURO, POUND, etc.)
+     * @return the English currency representation with decimal parts as cents
      */
     public static String toEnglishCurrency(double amount, String currency) {
         long wholePart = (long) amount;
