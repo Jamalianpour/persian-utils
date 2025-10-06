@@ -59,6 +59,10 @@ public class IranianIban {
 
     /**
      * Bank information holder class.
+     * <p>
+     * Contains detailed information about an Iranian bank including
+     * bank code, Persian and English names, and abbreviation.
+     * </p>
      */
     public static class BankInfo {
         private final String code;
@@ -66,6 +70,14 @@ public class IranianIban {
         private final String englishName;
         private final String abbreviation;
 
+        /**
+         * Constructs a BankInfo with the specified details.
+         *
+         * @param code the bank code
+         * @param persianName the Persian name of the bank
+         * @param englishName the English name of the bank
+         * @param abbreviation the bank abbreviation
+         */
         public BankInfo(String code, String persianName, String englishName, String abbreviation) {
             this.code = code;
             this.persianName = persianName;
@@ -73,11 +85,39 @@ public class IranianIban {
             this.abbreviation = abbreviation;
         }
 
+        /**
+         * Gets the bank code.
+         *
+         * @return the bank code
+         */
         public String getCode() { return code; }
+
+        /**
+         * Gets the Persian name of the bank.
+         *
+         * @return the Persian name of the bank
+         */
         public String getPersianName() { return persianName; }
+
+        /**
+         * Gets the English name of the bank.
+         *
+         * @return the English name of the bank
+         */
         public String getEnglishName() { return englishName; }
+
+        /**
+         * Gets the abbreviation of the bank name.
+         *
+         * @return the abbreviation of the bank name
+         */
         public String getAbbreviation() { return abbreviation; }
 
+        /**
+         * Returns a string representation of this bank.
+         *
+         * @return a formatted string containing the bank's Persian name, English name, and code
+         */
         @Override
         public String toString() {
             return String.format("%s (%s) - %s", persianName, englishName, code);
@@ -265,7 +305,11 @@ public class IranianIban {
     }
 
     /**
-     * Information extracted from an IBAN.
+     * Comprehensive information container about an Iranian IBAN.
+     * <p>
+     * Provides detailed analysis including validation status, bank identification,
+     * account number extraction, and formatted representations of the IBAN.
+     * </p>
      */
     public static class IbanInfo {
         private final String iban;
@@ -276,6 +320,15 @@ public class IranianIban {
         private final String formatted;
         private final String compact;
 
+        /**
+         * Constructs an IbanInfo object by analyzing the given IBAN.
+         * <p>
+         * Automatically validates the IBAN and extracts all relevant information
+         * including bank code, bank details, and account number.
+         * </p>
+         *
+         * @param iban the IBAN to analyze
+         */
         public IbanInfo(String iban) {
             this.iban = normalizeIban(iban);
             this.valid = this.iban != null && IranianIban.isValid(this.iban);
@@ -295,14 +348,60 @@ public class IranianIban {
             }
         }
 
+        /**
+         * Gets the normalized IBAN.
+         *
+         * @return the normalized IBAN
+         */
         public String getIban() { return iban; }
+
+        /**
+         * Checks if the IBAN is valid.
+         *
+         * @return true if the IBAN is valid, false otherwise
+         */
         public boolean isValid() { return valid; }
+
+        /**
+         * Gets the bank code extracted from the IBAN.
+         *
+         * @return the bank code, or null if IBAN is invalid
+         */
         public String getBankCode() { return bankCode; }
+
+        /**
+         * Gets the bank information extracted from the IBAN.
+         *
+         * @return the bank information, or null if IBAN is invalid or bank not recognized
+         */
         public BankInfo getBankInfo() { return bankInfo; }
+
+        /**
+         * Gets the account number extracted from the IBAN.
+         *
+         * @return the account number, or null if IBAN is invalid
+         */
         public String getAccountNumber() { return accountNumber; }
+
+        /**
+         * Gets the formatted representation of the IBAN.
+         *
+         * @return the formatted IBAN, or null if invalid
+         */
         public String getFormatted() { return formatted; }
+
+        /**
+         * Gets the compact representation of the IBAN.
+         *
+         * @return the compact IBAN format, or null if invalid
+         */
         public String getCompact() { return compact; }
 
+        /**
+         * Returns a string representation of this IBAN information.
+         *
+         * @return a formatted string describing the IBAN with relevant details
+         */
         @Override
         public String toString() {
             if (!valid) {

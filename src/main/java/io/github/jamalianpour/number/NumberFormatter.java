@@ -13,12 +13,30 @@ public class NumberFormatter {
      * Enum representing different separator styles.
      */
     public enum SeparatorStyle {
-        COMMA(',', '.'),           // 1,234,567.89
-        PERSIAN('٬', '٫'),          // ۱٬۲۳۴٬۵۶۷٫۸۹ (Persian thousands separator and decimal separator)
-        SPACE(' ', '.'),            // 1 234 567.89
-        UNDERSCORE('_', '.'),       // 1_234_567.89
-        APOSTROPHE('\'', '.'),      // 1'234'567.89
-        NONE('\0', '.');            // 1234567.89
+        /**
+         * 1,234,567.89
+         */
+        COMMA(',', '.'),
+        /**
+         * ۱٬۲۳۴٬۵۶۷٫۸۹ (Persian thousands separator and decimal separator)
+         */
+        PERSIAN('٬', '٫'),
+        /**
+         * 1 234 567.89
+         */
+        SPACE(' ', '.'),
+        /**
+         * 1_234_567.89
+         */
+        UNDERSCORE('_', '.'),
+        /**
+         * 1'234'567.89
+         */
+        APOSTROPHE('\'', '.'),
+        /**
+         * 1234567.89
+         */
+        NONE('\0', '.');
 
         private final char thousandSeparator;
         private final char decimalSeparator;
@@ -150,19 +168,31 @@ public class NumberFormatter {
     }
 
     // Pre-configured formats
+    /**
+     * ENGLISH FORMAT
+     */
     public static final FormatConfig ENGLISH_FORMAT = new FormatConfig()
             .withStyle(SeparatorStyle.COMMA)
             .withPersianDigits(false);
 
+    /**
+     * PERSIAN FORMAT
+     */
     public static final FormatConfig PERSIAN_FORMAT = new FormatConfig()
             .withStyle(SeparatorStyle.PERSIAN)
             .withPersianDigits(true);
 
+    /**
+     * CURRENCY FORMAT
+     */
     public static final FormatConfig CURRENCY_FORMAT = new FormatConfig()
             .withStyle(SeparatorStyle.COMMA)
             .withDecimalPlaces(2)
             .withPrefix("$");
 
+    /**
+     * PERSIAN CURRENCY FORMAT
+     */
     public static final FormatConfig PERSIAN_CURRENCY_FORMAT = new FormatConfig()
             .withStyle(SeparatorStyle.PERSIAN)
             .withPersianDigits(true)

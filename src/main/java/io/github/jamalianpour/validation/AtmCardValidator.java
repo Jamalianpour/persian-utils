@@ -81,6 +81,13 @@ public class AtmCardValidator {
         private final String englishName;
         private final String code;
 
+        /**
+         * constructor for card issuer information holder class.
+         * @param bin bin of card
+         * @param persianName Persian name of bank
+         * @param englishName English name of bank
+         * @param code card number
+         */
         public CardIssuerInfo(String bin, String persianName, String englishName, String code) {
             this.bin = bin;
             this.persianName = persianName;
@@ -393,6 +400,10 @@ public class AtmCardValidator {
         private final String formatted;
         private final String masked;
 
+        /**
+         * constructor for Information about a card.
+         * @param cardNumber card number
+         */
         public CardInfo(String cardNumber) {
             this.cardNumber = normalizeCardNumber(cardNumber);
             this.valid = this.cardNumber != null && AtmCardValidator.isValid(this.cardNumber);

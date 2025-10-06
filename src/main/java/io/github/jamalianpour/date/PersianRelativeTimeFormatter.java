@@ -18,10 +18,22 @@ public class PersianRelativeTimeFormatter {
      * Time formatting options
      */
     public enum FormatStyle {
-        NUMERIC,    // "۵ دقیقه پیش"
-        WORDS,      // "پنج دقیقه پیش"
-        SHORT,      // "۵د پیش"
-        FUZZY       // "چند دقیقه پیش"
+        /**
+         *  "۵ دقیقه پیش"
+         */
+        NUMERIC,
+        /**
+         *  "پنج دقیقه پیش"
+         */
+        WORDS,
+        /**
+         *  "۵د پیش"
+         */
+        SHORT,
+        /**
+         * "چند دقیقه پیش"
+         */
+        FUZZY
     }
 
     /**
@@ -309,7 +321,12 @@ public class PersianRelativeTimeFormatter {
     }
 
     /**
-     * Convenience method for common time periods.
+     * Convenience methods for common time periods in Persian.
+     * <p>
+     * Provides ready-to-use Persian strings for expressing relative time
+     * both in the past (ago) and future (in). These are commonly used for
+     * displaying user-friendly time differences in Persian applications.
+     * </p>
      */
     public static class Common {
         /**
@@ -366,7 +383,6 @@ public class PersianRelativeTimeFormatter {
             return "چند ساعت پیش";
         }
 
-
         /**
          * Gets the Jalali date for yesterday from the system clock in the default time-zone.
          *
@@ -403,71 +419,155 @@ public class PersianRelativeTimeFormatter {
             return "چند هفته پیش";
         }
 
+        /**
+         * Returns a string representing a time difference of one month ago.
+         *
+         * @return a string representing a time difference of one month ago
+         */
         public static String oneMonthAgo() {
             return "یک ماه پیش";
         }
 
+        /**
+         * Returns a string representing a time difference of a few months ago.
+         *
+         * @return a string representing a time difference of a few months ago
+         */
         public static String fewMonthsAgo() {
             return "چند ماه پیش";
         }
 
+        /**
+         * Returns a string representing a time difference of one year ago.
+         *
+         * @return a string representing a time difference of one year ago
+         */
         public static String oneYearAgo() {
             return "یک سال پیش";
         }
 
+        /**
+         * Returns a string representing a time difference of a few years ago.
+         *
+         * @return a string representing a time difference of a few years ago
+         */
         public static String fewYearsAgo() {
             return "چند سال پیش";
         }
 
-        // Future expressions
+        /**
+         * Returns a string representing "in a few seconds" in Persian.
+         *
+         * @return a string representing "in a few seconds" in Persian
+         */
         public static String inFewSeconds() {
             return "چند لحظه دیگر";
         }
 
+        /**
+         * Returns a string representing "in one minute" in Persian.
+         *
+         * @return a string representing "in one minute" in Persian
+         */
         public static String inOneMinute() {
             return "یک دقیقه دیگر";
         }
 
+        /**
+         * Returns a string representing "in a few minutes" in Persian.
+         *
+         * @return a string representing "in a few minutes" in Persian
+         */
         public static String inFewMinutes() {
             return "چند دقیقه دیگر";
         }
 
+        /**
+         * Returns a string representing "in one hour" in Persian.
+         *
+         * @return a string representing "in one hour" in Persian
+         */
         public static String inOneHour() {
             return "یک ساعت دیگر";
         }
 
+        /**
+         * Returns a string representing "in a few hours" in Persian.
+         *
+         * @return a string representing "in a few hours" in Persian
+         */
         public static String inFewHours() {
             return "چند ساعت دیگر";
         }
 
+        /**
+         * Returns a string representing "tomorrow" in Persian.
+         *
+         * @return a string representing "tomorrow" in Persian
+         */
         public static String tomorrow() {
             return "فردا";
         }
 
+        /**
+         * Returns a string representing "in a few days" in Persian.
+         *
+         * @return a string representing "in a few days" in Persian
+         */
         public static String inFewDays() {
             return "چند روز دیگر";
         }
 
+        /**
+         * Returns a string representing "in one week" in Persian.
+         *
+         * @return a string representing "in one week" in Persian
+         */
         public static String inOneWeek() {
             return "یک هفته دیگر";
         }
 
+        /**
+         * Returns a string representing "in a few weeks" in Persian.
+         *
+         * @return a string representing "in a few weeks" in Persian
+         */
         public static String inFewWeeks() {
             return "چند هفته دیگر";
         }
 
+        /**
+         * Returns a string representing "in one month" in Persian.
+         *
+         * @return a string representing "in one month" in Persian
+         */
         public static String inOneMonth() {
             return "یک ماه دیگر";
         }
 
+        /**
+         * Returns a string representing "in a few months" in Persian.
+         *
+         * @return a string representing "in a few months" in Persian
+         */
         public static String inFewMonths() {
             return "چند ماه دیگر";
         }
 
+        /**
+         * Returns a string representing "in one year" in Persian.
+         *
+         * @return a string representing "in one year" in Persian
+         */
         public static String inOneYear() {
             return "یک سال دیگر";
         }
 
+        /**
+         * Returns a string representing "in a few years" in Persian.
+         *
+         * @return a string representing "in a few years" in Persian
+         */
         public static String inFewYears() {
             return "چند سال دیگر";
         }

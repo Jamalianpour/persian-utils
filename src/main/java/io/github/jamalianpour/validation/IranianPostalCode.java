@@ -34,6 +34,15 @@ public class IranianPostalCode {
         private final int rangeStart;
         private final int rangeEnd;
 
+        /**
+         * constructor of postal code range holder class.
+         * @param provincePersian province name in Persian
+         * @param provinceEnglish province name in English
+         * @param cityPersian cityPersian
+         * @param cityEnglish cityEnglish
+         * @param rangeStart rangeStart
+         * @param rangeEnd rangeEnd
+         */
         public PostalCodeRange(String provincePersian, String provinceEnglish,
                                String cityPersian, String cityEnglish,
                                int rangeStart, int rangeEnd) {
@@ -358,6 +367,10 @@ public class IranianPostalCode {
         private final String formatted;
         private final String formattedPersian;
 
+        /**
+         * constructor for information about a postal code.
+         * @param postalCode input for postal code
+         */
         public PostalCodeInfo(String postalCode) {
             this.postalCode = normalize(postalCode);
             this.valid = IranianPostalCode.isValid(this.postalCode);

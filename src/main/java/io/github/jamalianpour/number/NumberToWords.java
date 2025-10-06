@@ -54,11 +54,25 @@ public class NumberToWords {
             "", "thousand", "million", "billion", "trillion", "quadrillion", "quintillion", "sextillion"
     };
 
-    // Currency names
+    /**
+     * Currency names ریال
+     */
     public static final String RIAL = "ریال";
+    /**
+     * Currency names تومان
+     */
     public static final String TOMAN = "تومان";
+    /**
+     * Currency names dollar
+     */
     public static final String DOLLAR = "dollar";
+    /**
+     * Currency names euro
+     */
     public static final String EURO = "euro";
+    /**
+     * Currency names pound
+     */
     public static final String POUND = "pound";
 
     private static final String TOMANS = "تومان";

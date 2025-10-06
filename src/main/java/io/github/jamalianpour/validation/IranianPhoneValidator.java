@@ -7,7 +7,20 @@ import java.util.regex.Pattern;
 
 /**
  * Validator and utilities for Iranian phone numbers (mobile and landline).
- * Supports operator identification, area codes, and various formatting options.
+ * <p>
+ * This class provides comprehensive validation and formatting utilities for Iranian phone numbers,
+ * including mobile numbers, landline numbers, and emergency numbers. It supports operator identification,
+ * area code mapping, and various formatting options.
+ * </p>
+ * <p>
+ * The validator handles multiple input formats including:
+ * </p>
+ * <ul>
+ *   <li>National format: 09123456789</li>
+ *   <li>International format: +989123456789</li>
+ *   <li>Alternative international: 00989123456789</li>
+ *   <li>Persian digits: ۰۹۱۲۳۴۵۶۷۸۹</li>
+ * </ul>
  */
 public class IranianPhoneValidator {
 
@@ -112,6 +125,9 @@ public class IranianPhoneValidator {
 
     /**
      * Operator type enumeration.
+     * <p>
+     * Defines the different types of phone operators available in Iran.
+     * </p>
      */
     public enum OperatorType {
         /**
@@ -160,6 +176,13 @@ public class IranianPhoneValidator {
         private final String englishName;
         private final OperatorType type;
 
+        /**
+         * Constructor for Operator information holder class
+         * @param code code
+         * @param persianName Persian name
+         * @param englishName English name
+         * @param type type
+         */
         public OperatorInfo(String code, String persianName, String englishName, OperatorType type) {
             this.code = code;
             this.persianName = persianName;
@@ -397,12 +420,23 @@ public class IranianPhoneValidator {
     }
 
     /**
-     * Formats a phone number in various styles.
+     * Utility class for formatting phone numbers in various styles.
+     * <p>
+     * Provides multiple formatting options including dashed, spaced, parenthesized,
+     * international, and Persian digit formats.
+     * </p>
      */
     public static class PhoneFormatter {
 
         /**
-         * Formats as: 0912-345-6789
+         * Formats a phone number with dashes.
+         * <p>
+         * Mobile format: 0912-345-6789<br>
+         * Landline format: 021-12345678
+         * </p>
+         *
+         * @param phoneNumber the phone number to format
+         * @return formatted phone number with dashes, or null if invalid
          */
         public static String formatDashed(String phoneNumber) {
             phoneNumber = normalizePhoneNumber(phoneNumber);
@@ -426,7 +460,14 @@ public class IranianPhoneValidator {
         }
 
         /**
-         * Formats as: 0912 345 6789
+         * Formats a phone number with spaces.
+         * <p>
+         * Mobile format: 0912 345 6789<br>
+         * Landline format: 021 12345678
+         * </p>
+         *
+         * @param phoneNumber the phone number to format
+         * @return formatted phone number with spaces, or null if invalid
          */
         public static String formatSpaced(String phoneNumber) {
             phoneNumber = normalizePhoneNumber(phoneNumber);
@@ -450,7 +491,14 @@ public class IranianPhoneValidator {
         }
 
         /**
-         * Formats as: (0912) 345-6789
+         * Formats a phone number with parentheses around the prefix.
+         * <p>
+         * Mobile format: (0912) 345-6789<br>
+         * Landline format: (021) 12345678
+         * </p>
+         *
+         * @param phoneNumber the phone number to format
+         * @return formatted phone number with parentheses, or null if invalid
          */
         public static String formatParentheses(String phoneNumber) {
             phoneNumber = normalizePhoneNumber(phoneNumber);
@@ -474,7 +522,14 @@ public class IranianPhoneValidator {
         }
 
         /**
-         * Formats as international: +98 912 345 6789
+         * Formats a phone number in international format with +98 country code.
+         * <p>
+         * Mobile format: +98 912 345 6789<br>
+         * Landline format: +98 21 12345678
+         * </p>
+         *
+         * @param phoneNumber the phone number to format
+         * @return formatted phone number in international format, or null if invalid
          */
         public static String formatInternational(String phoneNumber) {
             phoneNumber = normalizePhoneNumber(phoneNumber);
@@ -501,7 +556,13 @@ public class IranianPhoneValidator {
         }
 
         /**
-         * Formats with Persian digits.
+         * Formats a phone number with Persian (Farsi) digits.
+         * <p>
+         * Converts all digits to Persian numerals: ۰۹۱۲ ۳۴۵ ۶۷۸۹
+         * </p>
+         *
+         * @param phoneNumber the phone number to format
+         * @return formatted phone number with Persian digits, or null if invalid
          */
         public static String formatPersian(String phoneNumber) {
             String formatted = formatSpaced(phoneNumber);
@@ -515,7 +576,12 @@ public class IranianPhoneValidator {
     }
 
     /**
-     * Information about a phone number.
+     * Comprehensive information container about a phone number.
+     * <p>
+     * Provides detailed analysis including validation status, type identification,
+     * operator information (for mobile), area code and city (for landline),
+     * and formatted representations.
+     * </p>
      */
     public static class PhoneInfo {
         private final String phoneNumber;
@@ -529,6 +595,15 @@ public class IranianPhoneValidator {
         private final String formatted;
         private final String international;
 
+        /**
+         * Constructs a PhoneInfo object by analyzing the given phone number.
+         * <p>
+         * Automatically determines the phone number type, validates it,
+         * and extracts all relevant information.
+         * </p>
+         *
+         * @param phoneNumber the phone number to analyze
+         */
         public PhoneInfo(String phoneNumber) {
             String normalized = normalizePhoneNumber(phoneNumber);
 
@@ -569,17 +644,81 @@ public class IranianPhoneValidator {
             }
         }
 
+        /**
+         * Gets the normalized phone number.
+         *
+         * @return the normalized phone number
+         */
         public String getPhoneNumber() { return phoneNumber; }
+
+        /**
+         * Checks if the phone number is valid.
+         *
+         * @return true if the phone number is valid, false otherwise
+         */
         public boolean isValid() { return valid; }
+
+        /**
+         * Checks if the phone number is a mobile number.
+         *
+         * @return true if the phone number is a mobile number, false otherwise
+         */
         public boolean isMobile() { return mobile; }
+
+        /**
+         * Checks if the phone number is a landline number.
+         *
+         * @return true if the phone number is a landline number, false otherwise
+         */
         public boolean isLandline() { return landline; }
+
+        /**
+         * Checks if the phone number is an emergency number.
+         *
+         * @return true if the phone number is an emergency number, false otherwise
+         */
         public boolean isEmergency() { return emergency; }
+
+        /**
+         * Gets the operator information for mobile numbers.
+         *
+         * @return the operator information, or null if not a mobile number
+         */
         public OperatorInfo getOperator() { return operator; }
+
+        /**
+         * Gets the area code for landline numbers.
+         *
+         * @return the area code, or null if not a landline number
+         */
         public String getAreaCode() { return areaCode; }
+
+        /**
+         * Gets the city name for landline numbers.
+         *
+         * @return the city name in Persian, or null if not a landline number
+         */
         public String getCityName() { return cityName; }
+
+        /**
+         * Gets the formatted representation of the phone number.
+         *
+         * @return the formatted phone number, or null if invalid
+         */
         public String getFormatted() { return formatted; }
+
+        /**
+         * Gets the international format representation of the phone number.
+         *
+         * @return the international format phone number, or null if invalid
+         */
         public String getInternational() { return international; }
 
+        /**
+         * Returns a string representation of this phone information.
+         *
+         * @return a formatted string describing the phone number with relevant details
+         */
         @Override
         public String toString() {
             if (!valid) {

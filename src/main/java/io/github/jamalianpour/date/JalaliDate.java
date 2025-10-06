@@ -18,9 +18,20 @@ public final class JalaliDate implements Comparable<JalaliDate>, Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * year
+     */
+
     private final int year;
-    private final int month; // 1..12
-    private final int day;   // 1..31
+    /**
+     * 1..12
+     */
+
+    private final int month;
+    /**
+     * 1..31
+     */
+    private final int day;
 
     // Persian month names
     private static final String[] MONTH_NAMES_FA = {
@@ -1242,6 +1253,10 @@ public final class JalaliDate implements Comparable<JalaliDate>, Serializable {
     // Builder Pattern
     // ------------------------
 
+    /**
+     * Sets the year for the JalaliDate being built.
+     * The year is from 1 to 3178.
+     */
     public static class Builder {
         private int year = 1400;
         private int month = 1;
@@ -1300,6 +1315,9 @@ public final class JalaliDate implements Comparable<JalaliDate>, Serializable {
             return this;
         }
 
+        /**
+         * @return instance of JalaliDate
+         */
         public JalaliDate build() {
             return JalaliDate.of(year, month, day);
         }
@@ -1319,10 +1337,18 @@ public final class JalaliDate implements Comparable<JalaliDate>, Serializable {
     // Date Range Class
     // ------------------------
 
+    /**
+     * Range of JalaliDate with start and end
+     */
     public static class JalaliDateRange {
         private final JalaliDate start;
         private final JalaliDate end;
 
+        /**
+         * Constructor for range of JalaliDate with start and end
+         * @param start start date
+         * @param end end date
+         */
         public JalaliDateRange(JalaliDate start, JalaliDate end) {
             this.start = Objects.requireNonNull(start);
             this.end = Objects.requireNonNull(end);
@@ -1399,6 +1425,9 @@ public final class JalaliDate implements Comparable<JalaliDate>, Serializable {
     // Format Enum
     // ------------------------
 
+    /**
+     * Date format
+     */
     public enum DateFormat {
         /**
          * ISO format: 1400-01-01
@@ -1434,6 +1463,9 @@ public final class JalaliDate implements Comparable<JalaliDate>, Serializable {
     // Holiday Support Class
     // ------------------------
 
+    /**
+     * Iranian calendar holidays
+     */
     public static class IranianHolidays {
         private static final Map<String, String> FIXED_HOLIDAYS = new HashMap<>();
 
@@ -1447,7 +1479,7 @@ public final class JalaliDate implements Comparable<JalaliDate>, Serializable {
             FIXED_HOLIDAYS.put("1-13", "Sizdah Bedar");
 
             // Other fixed holidays
-            FIXED_HOLIDAYS.put("3-14", "Death of Khomeini");
+            FIXED_HOLIDAYS.put("3-14", "Death of Imam Khomeini");
             FIXED_HOLIDAYS.put("3-15", "Revolt of Khordad 15");
             FIXED_HOLIDAYS.put("11-22", "Victory of Islamic Revolution");
             FIXED_HOLIDAYS.put("12-29", "Oil Nationalization Day");

@@ -18,6 +18,7 @@ public class PersianTextUtils {
 
     // Arabic characters that should be converted to Persian
     private static final Map<Character, Character> ARABIC_TO_PERSIAN_MAP = new HashMap<>();
+
     static {
         ARABIC_TO_PERSIAN_MAP.put('ك', 'ک');  // Arabic Kaf to Persian Kaf
         ARABIC_TO_PERSIAN_MAP.put('ڪ', 'ک');  // Another Arabic Kaf variant
@@ -114,8 +115,8 @@ public class PersianTextUtils {
     /**
      * Checks if a string is entirely composed of Persian characters (strict mode - no English allowed).
      *
-     * @param text       the text to check
-     * @param allowDigits whether to allow Persian digits
+     * @param text             the text to check
+     * @param allowDigits      whether to allow Persian digits
      * @param allowPunctuation whether to allow Persian punctuation
      * @return true if entirely Persian according to criteria, false otherwise
      */
@@ -468,7 +469,7 @@ public class PersianTextUtils {
     /**
      * Adds Zero-Width Non-Joiner (ZWNJ) between characters.
      *
-     * @param text the text to process
+     * @param text     the text to process
      * @param position the position to insert ZWNJ
      * @return text with ZWNJ inserted
      */
@@ -512,8 +513,17 @@ public class PersianTextUtils {
      * Text direction enumeration.
      */
     public enum TextDirection {
+        /**
+         * Right to left text
+         */
         RTL("Right-to-Left"),
+        /**
+         * Left to right text
+         */
         LTR("Left-to-Right"),
+        /**
+         * Neutral
+         */
         NEUTRAL("Neutral");
 
         private final String description;
@@ -522,6 +532,9 @@ public class PersianTextUtils {
             this.description = description;
         }
 
+        /**
+         * @return get description of enum
+         */
         public String getDescription() {
             return description;
         }
@@ -538,6 +551,11 @@ public class PersianTextUtils {
         private final double persianPercentage;
         private final TextDirection direction;
 
+        /**
+         * Statistics about Persian content in a text.
+         *
+         * @param text input text
+         */
         public PersianTextStats(String text) {
             if (text == null || text.isEmpty()) {
                 this.totalChars = 0;
@@ -566,12 +584,47 @@ public class PersianTextUtils {
             return count;
         }
 
-        public int getTotalChars() { return totalChars; }
-        public int getPersianChars() { return persianChars; }
-        public int getEnglishChars() { return englishChars; }
-        public int getPersianWords() { return persianWords; }
-        public double getPersianPercentage() { return persianPercentage; }
-        public TextDirection getDirection() { return direction; }
+        /**
+         * @return totalChars
+         */
+        public int getTotalChars() {
+            return totalChars;
+        }
+
+        /**
+         * @return persianChars
+         */
+        public int getPersianChars() {
+            return persianChars;
+        }
+
+        /**
+         * @return englishChars
+         */
+        public int getEnglishChars() {
+            return englishChars;
+        }
+
+        /**
+         * @return persianWords
+         */
+        public int getPersianWords() {
+            return persianWords;
+        }
+
+        /**
+         * @return persianPercentage
+         */
+        public double getPersianPercentage() {
+            return persianPercentage;
+        }
+
+        /**
+         * @return text direction
+         */
+        public TextDirection getDirection() {
+            return direction;
+        }
 
         @Override
         public String toString() {

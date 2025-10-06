@@ -207,7 +207,13 @@ public class IranianNationalId {
     }
 
     /**
-     * Information extracted from a national ID.
+     * Comprehensive information container about an Iranian National ID.
+     * <p>
+     * Provides detailed analysis including validation status, province identification,
+     * and formatted representations of the national ID number.
+     * Iranian national IDs are 10-digit numbers where the first 3 digits indicate
+     * the province of issuance.
+     * </p>
      */
     public static class NationalIdInfo {
         private final String nationalId;
@@ -217,6 +223,15 @@ public class IranianNationalId {
         private final String formatted;
         private final String formattedPersian;
 
+        /**
+         * Constructs a NationalIdInfo object by analyzing the given national ID.
+         * <p>
+         * Automatically validates the national ID and extracts all relevant information
+         * including province code and name.
+         * </p>
+         *
+         * @param nationalId the national ID to analyze
+         */
         public NationalIdInfo(String nationalId) {
             this.nationalId = normalizeNationalId(nationalId);
             this.valid = IranianNationalId.isValid(nationalId);
@@ -234,19 +249,69 @@ public class IranianNationalId {
             }
         }
 
+        /**
+         * Normalizes a national ID by converting Persian digits to English
+         * and removing spaces and dashes.
+         *
+         * @param id the national ID to normalize
+         * @return normalized national ID containing only digits, or null if input is null
+         */
         private String normalizeNationalId(String id) {
             if (id == null) return null;
             id = PersianNumberConverter.toEnglishDigits(id.trim());
             return id.replaceAll("[\\s-]", "");
         }
 
+        /**
+         * Gets the normalized national ID.
+         *
+         * @return the normalized national ID
+         */
         public String getNationalId() { return nationalId; }
+
+        /**
+         * Checks if the national ID is valid.
+         *
+         * @return true if the national ID is valid, false otherwise
+         */
         public boolean isValid() { return valid; }
+
+        /**
+         * Gets the province code extracted from the national ID.
+         * <p>
+         * The province code is derived from the first 3 digits of the national ID.
+         * </p>
+         *
+         * @return the province code, or null if national ID is invalid
+         */
         public String getProvinceCode() { return provinceCode; }
+
+        /**
+         * Gets the province name extracted from the national ID.
+         *
+         * @return the province name in Persian, or null if national ID is invalid
+         */
         public String getProvinceName() { return provinceName; }
+
+        /**
+         * Gets the formatted representation of the national ID.
+         *
+         * @return the formatted national ID, or null if invalid
+         */
         public String getFormatted() { return formatted; }
+
+        /**
+         * Gets the formatted representation of the national ID with Persian digits.
+         *
+         * @return the formatted national ID with Persian numerals, or null if invalid
+         */
         public String getFormattedPersian() { return formattedPersian; }
 
+        /**
+         * Returns a string representation of this national ID information.
+         *
+         * @return a formatted string describing the national ID with relevant details
+         */
         @Override
         public String toString() {
             if (!valid) {

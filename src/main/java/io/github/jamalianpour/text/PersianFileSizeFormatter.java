@@ -17,8 +17,14 @@ public class PersianFileSizeFormatter {
      * Calculation mode for file size units
      */
     public enum SizeMode {
-        BINARY(1024),   // 1024 bytes = 1 KB (standard for storage)
-        DECIMAL(1000);  // 1000 bytes = 1 KB (standard for network)
+        /**
+         * 1024 bytes = 1 KB (standard for storage)
+         */
+        BINARY(1024),
+        /**
+         * 1000 bytes = 1 KB (standard for network)
+         */
+        DECIMAL(1000);
 
         private final int base;
 
@@ -26,6 +32,10 @@ public class PersianFileSizeFormatter {
             this.base = base;
         }
 
+        /**
+         * get base
+         * @return base
+         */
         public int getBase() {
             return base;
         }
@@ -442,42 +452,100 @@ public class PersianFileSizeFormatter {
     }
 
     /**
-     * Utility methods for common file sizes.
+     * Utility methods for formatting and converting file sizes.
+     * <p>
+     * Provides methods to format file sizes in Persian with appropriate units
+     * (bytes, kilobytes, megabytes, gigabytes, terabytes) and convert between
+     * different size units using binary (1024-based) calculations.
+     * </p>
      */
     public static class Common {
+        /**
+         * Formats a byte value with Persian digits and the Persian word for bytes.
+         *
+         * @param bytes the number of bytes to format
+         * @return formatted string with Persian digits and " بایت" suffix
+         */
         public static String formatBytes(long bytes) {
             return PersianNumberConverter.toPersianDigits(String.valueOf(bytes)) + " بایت";
         }
 
+        /**
+         * Formats a kilobyte value with Persian digits and the Persian word for kilobytes.
+         *
+         * @param kb the number of kilobytes to format
+         * @return formatted string with Persian digits and " کیلوبایت" suffix
+         */
         public static String formatKilobytes(double kb) {
             return PersianNumberConverter.toPersianDigits(String.valueOf((long) kb)) + " کیلوبایت";
         }
 
+        /**
+         * Formats a megabyte value with Persian digits and the Persian word for megabytes.
+         *
+         * @param mb the number of megabytes to format
+         * @return formatted string with Persian digits and " مگابایت" suffix
+         */
         public static String formatMegabytes(double mb) {
             return PersianNumberConverter.toPersianDigits(String.valueOf((long) mb)) + " مگابایت";
         }
 
+        /**
+         * Formats a gigabyte value with Persian digits and the Persian word for gigabytes.
+         *
+         * @param gb the number of gigabytes to format
+         * @return formatted string with Persian digits and " گیگابایت" suffix
+         */
         public static String formatGigabytes(double gb) {
             return PersianNumberConverter.toPersianDigits(String.valueOf((long) gb)) + " گیگابایت";
         }
 
+        /**
+         * Formats a terabyte value with Persian digits and the Persian word for terabytes.
+         *
+         * @param tb the number of terabytes to format
+         * @return formatted string with Persian digits and " ترابایت" suffix
+         */
         public static String formatTerabytes(double tb) {
             return PersianNumberConverter.toPersianDigits(String.valueOf((long) tb)) + " ترابایت";
         }
 
-        // Quick conversions
+        /**
+         * Converts kilobytes to bytes using binary calculation (1 KB = 1024 bytes).
+         *
+         * @param kb the number of kilobytes to convert
+         * @return the equivalent number of bytes
+         */
         public static long kilobytesToBytes(double kb) {
             return (long) (kb * 1024);
         }
 
+        /**
+         * Converts megabytes to bytes using binary calculation (1 MB = 1024² bytes).
+         *
+         * @param mb the number of megabytes to convert
+         * @return the equivalent number of bytes
+         */
         public static long megabytesToBytes(double mb) {
             return (long) (mb * 1024 * 1024);
         }
 
+        /**
+         * Converts gigabytes to bytes using binary calculation (1 GB = 1024³ bytes).
+         *
+         * @param gb the number of gigabytes to convert
+         * @return the equivalent number of bytes
+         */
         public static long gigabytesToBytes(double gb) {
             return (long) (gb * 1024 * 1024 * 1024);
         }
 
+        /**
+         * Converts terabytes to bytes using binary calculation (1 TB = 1024⁴ bytes).
+         *
+         * @param tb the number of terabytes to convert
+         * @return the equivalent number of bytes
+         */
         public static long terabytesToBytes(double tb) {
             return (long) (tb * 1024L * 1024 * 1024 * 1024);
         }
