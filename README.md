@@ -1,7 +1,8 @@
 # Persian Utils
 
 ![Language](https://img.shields.io/badge/language-Java-blue)
-![License](https://img.shields.io/github/license/jamalianpour/persianutils)
+[![Coverage Status](https://coveralls.io/repos/github/jamalianpour/persian-utils/badge.svg?branch=main)](https://coveralls.io/github/jamalianpour/persian-utils?branch=main)
+![License](https://img.shields.io/github/license/jamalianpour/persian-utils)
 [![Docs](https://img.shields.io/badge/docs-available-brightgreen.svg)](https://jamalianpour.github.io/persian-utils/)
 
 [English](README.md) | [فارسی 🇮🇷](README_FA.md)
@@ -124,7 +125,7 @@ mvn test
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](https://github.com/Jamalianpour/persian-utils/blob/master/LICENSE) file for details.
+This project is licensed under the Apache License - see the [LICENSE](https://github.com/Jamalianpour/persian-utils/blob/master/LICENSE) file for details.
 
 ## Author
 

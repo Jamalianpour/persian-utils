@@ -85,4 +85,4 @@ Practical code examples and common use cases.
 
 ## License
 
-MIT License - see [LICENSE](https://github.com/jamalianpour/persian-utils/blob/main/LICENSE) for details.
+Apache License - see [LICENSE](https://github.com/jamalianpour/persian-utils/blob/main/LICENSE) for details.
