@@ -1,7 +1,7 @@
 # Persian Utils
 
 ![Language](https://img.shields.io/badge/language-Java-blue)
-[![Coverage Status](https://coveralls.io/repos/github/jamalianpour/persian-utils/badge.svg?branch=main)](https://coveralls.io/github/jamalianpour/persian-utils?branch=main)
+[![codecov](https://codecov.io/gh/jamalianpour/persian-utils/branch/main/graph/badge.svg)](https://codecov.io/gh/jamalianpour/persian-utils)
 ![License](https://img.shields.io/github/license/jamalianpour/persian-utils)
 [![Docs](https://img.shields.io/badge/docs-available-brightgreen.svg)](https://jamalianpour.github.io/persian-utils/)
 

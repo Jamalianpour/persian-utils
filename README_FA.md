@@ -1,5 +1,10 @@
 # Persian Utils
 
+![Language](https://img.shields.io/badge/language-Java-blue)
+[![codecov](https://codecov.io/gh/jamalianpour/persian-utils/branch/main/graph/badge.svg)](https://codecov.io/gh/jamalianpour/persian-utils)
+![License](https://img.shields.io/github/license/jamalianpour/persian-utils)
+[![Docs](https://img.shields.io/badge/docs-available-brightgreen.svg)](https://jamalianpour.github.io/persian-utils/)
+
 **کتابخانه جامع جاوا برای ابزارهای زبان فارسی**
 
 کتابخانه‌ای کامل برای پردازش زبان فارسی در جاوا که شامل تبدیل تاریخ، پردازش متن، قالب‌بندی اعداد و ابزارهای اعتبارسنجی می‌باشد.

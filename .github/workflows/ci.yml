@@ -20,5 +20,9 @@ jobs:
       - name: Build and test
         run: mvn -Dgpg.skip=true clean verify
 
-      - name: Report coverage to Coveralls
-        run: mvn -Dgpg.skip=true coveralls:report -DrepoToken=${{ secrets.COVERALLS_REPO_TOKEN }}
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          files: ./target/site/jacoco/jacoco.xml
+          fail_ci_if_error: true
+          token: ${{ secrets.CODECOV_TOKEN }}
