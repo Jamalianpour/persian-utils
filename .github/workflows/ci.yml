@@ -10,14 +10,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 17
 
-      - name: Build with Maven
-        run: mvn clean verify
+      - name: Build and test
+        run: mvn -Dgpg.skip=true clean verify
 
       - name: Report coverage to Coveralls
-        run: mvn coveralls:report -DrepoToken=${{ secrets.COVERALLS_REPO_TOKEN }}
+        run: mvn -Dgpg.skip=true coveralls:report -DrepoToken=${{ secrets.COVERALLS_REPO_TOKEN }}
